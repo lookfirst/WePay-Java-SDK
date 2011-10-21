@@ -31,7 +31,7 @@ Frequently Asked Questions
 
 Q: What is the license on this code?
 
-A: ASF 2.0
+A: MIT License
 
 Q: How do I build a jar file?
 

@@ -41,9 +41,13 @@ Q: Why isn't this in a Maven repo? Will you add a pom file?
 
 A: Maven is a steaming pile of dog shit. This API should never be included in any public repo. I won't ever support Maven here.
 
-Q: Is this an official API from WePay? What happens if I use this API and I loose all my money?
+Q: Is this an official API from WePay?
 
-A: No. Tough.
+A: I don't have any connection with WePay other than I'm just a happy user of their product. They've been really responsive to me and I just wanted to give back a bit.
+
+Q: What happens if I use this API and I loose all my money?
+
+A: Go cry somewhere else.
 
 Q: Why isn't the whole API here?
 

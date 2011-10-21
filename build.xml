@@ -1,0 +1,140 @@
+<?xml version="1.0"?>
+
+<!--
+	Build file for WePay-Java-SDK.
+-->
+<project name="WePay-Java-SDK" default="jar" basedir=".">
+    <description>
+    	Implementation of the WePay-Java-SDK
+    </description>
+
+    <property name="name" value="${ant.project.name}"/>
+
+    <property file="user.properties"/>
+    <property file="${user.home}/build.properties"/>
+    <property file="build.properties"/>
+    <property file="build.credentials.properties"/>
+    <property file="jar.properties"/>
+
+    <property name="base.dir" location="."/>
+
+    <property name="build.debug" value="on"/>
+    <property name="build.deprecation" value="on"/>
+
+    <property name="ant.build.javac.target" value="1.5"/>
+    <property name="ant.build.javac.source" value="1.5"/>
+
+    <property name="build.dir" location="target"/>
+    <property name="build.classes.dir" location="${build.dir}/classes"/>
+    <property name="build.javadoc.dir" location="${build.dir}/javadoc"/>
+    <property name="build.jar.file" location="${build.dir}/${name}.jar"/>
+    <property name="build.test" location="${build.dir}/test"/>
+
+    <property name="docs.dir" value="${build.dir}/docs"/>
+    <property name="javadoc.dir" value="javadoc"/>
+
+    <property name="lib.dir" location="lib"/>
+    <property name="src.dir" location="src"/>
+    <property name="test.dir" location="test"/>
+
+    <tstamp>
+        <format property="YEAR" pattern="yyyy"/>
+    </tstamp>
+
+	<property name="version" value="${sVersionRevision}"/>
+	<property name="build.version" value="${sVersionRevision}"/>
+
+	<property name="build.dist.dir" location="${build.dir}/${ant.project.name}-${version}"/>
+	<property name="build.dist.zip" location="${build.dir}/${ant.project.name}-${version}.zip"/>
+
+	<path id="master.classpath">
+		<fileset dir="${lib.dir}">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+
+    <target name="clean">
+        <delete dir="${build.dir}"/>
+    </target>
+
+    <target name="compile">
+        <mkdir dir="${build.classes.dir}"/>
+
+        <javac srcdir="${src.dir}"
+               destdir="${build.classes.dir}"
+               encoding="utf-8"
+               debug="${build.debug}"
+               deprecation="${build.deprecation}"
+               includeantruntime="false">
+            <classpath refid="master.classpath"/>
+        </javac>
+    </target>
+
+    <target name="jar" depends="compile">
+        <jar destfile="${build.jar.file}" basedir="${build.classes.dir}">
+            <manifest>
+                <attribute name="Specification-Version" value="${TODAY}"/>
+                <attribute name="Implementation-Version" value="${TODAY}"/>
+            </manifest>
+        </jar>
+    </target>
+
+    <target name="javadoc" depends="compile">
+        <javadoc
+                destdir="${build.javadoc.dir}"
+                packagenames="*"
+                classpathref="run.classpath"
+                author="true"
+                version="true"
+                Windowtitle="Sardine Javadoc">
+            <fileset dir="${src.dir}">
+                <exclude name="**/*.xml"/>
+            </fileset>
+            <doctitle><![CDATA[<h1>WePay-Java-SDK</h1>]]></doctitle>
+            <bottom>
+                <![CDATA[<i>Copyright &#169; ${YEAR} Jon Stevens et al. All Rights Reserved. Date: ${TODAY}</i>]]></bottom>
+        </javadoc>
+
+        <sync todir="${javadoc.dir}" includeEmptyDirs="true">
+            <fileset dir="${build.javadoc.dir}"/>
+        </sync>
+    </target>
+
+    <target name="dist" depends="clean, jar, javadoc">
+        <copy todir="${build.dist.dir}">
+            <fileset dir="${build.dir}">
+                <include name="javadoc/**"/>
+            </fileset>
+
+            <fileset dir=".">
+                <include name="build.xml"/>
+                <include name="README.md"/>
+            </fileset>
+        </copy>
+
+        <copy todir="${build.dist.dir}">
+            <fileset dir="${build.dir}">
+                <include name="*.jar"/>
+            </fileset>
+        </copy>
+
+        <copy todir="${build.dist.dir}/lib">
+            <fileset dir="lib">
+                <include name="*.jar"/>
+            </fileset>
+        </copy>
+
+        <copy todir="${build.dist.dir}/src">
+            <fileset dir="${base.dir}/src">
+                <include name="**"/>
+            </fileset>
+        </copy>
+
+        <dirname property="build.dist.dir.dirname" file="${build.dist.dir}"/>
+        <basename property="build.dist.dir.basename" file="${build.dist.dir}"/>
+
+        <zip zipfile="${build.dist.zip}" basedir="${build.dist.dir.dirname}">
+            <include name="${build.dist.dir.basename}/**"/>
+        </zip>
+    </target>
+</project>

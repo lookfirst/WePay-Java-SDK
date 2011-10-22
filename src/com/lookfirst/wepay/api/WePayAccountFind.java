@@ -21,7 +21,7 @@ public class WePayAccountFind extends WePayRequest<WePayAccountFindResponse> {
 	/** The name of the account you are searching for. */
 	private String name;
 	/** The reference ID of the account you are searching for (set by the app in in /account/create or account/modify). */
-	private String referenceId;
+	private Long referenceId;
 
 	/** */
 	public WePayAccountFind() {

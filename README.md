@@ -45,7 +45,7 @@ Q: Is this an official API from WePay?
 
 A: I don't have any connection with WePay other than I'm just a happy user of their product. They've been really responsive to me and I just wanted to give back a bit.
 
-Q: What happens if I use this API and I loose all my money?
+Q: What happens if I use this API and I lose all my money?
 
 A: Go cry somewhere else.
 

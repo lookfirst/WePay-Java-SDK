@@ -55,7 +55,7 @@ A: I just haven't implemented it yet. If you'd like to send me a pull request wi
 
 Q: What's missing?
 
-A: /preapproval, /disbursement, /withdrawl
+A: /preapproval, /withdrawl
 
 Q: What are the dependencies?
 

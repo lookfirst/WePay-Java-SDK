@@ -22,7 +22,7 @@ public class WePayAccountCreate extends WePayRequest<WePayAccountCreateResponse>
 	private String name;
 	/** The description of the account you want to create. */
 	private String description;
-	/** The reference id of the account. Can be any integer, but must be unique for the application/user pair. */
+	/** The reference id of the account. Must be unique for the application/user pair. */
 	private String referenceId;
 	/** The uri for an image that you want to use for the accounts icon. This image will be used in the co-branded checkout process. */
 	private String imageUri;

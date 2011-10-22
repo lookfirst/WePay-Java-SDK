@@ -8,5 +8,5 @@
 	<classpathentry kind="lib" path="lib/slf4j-api-1.6.3.jar"/>
 	<classpathentry kind="lib" path="lib/slf4j-jdk14-1.6.3.jar"/>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="output" path="target/classes"/>
+	<classpathentry kind="output" path="_eclipse"/>
 </classpath>

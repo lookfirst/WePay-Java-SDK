@@ -21,6 +21,7 @@ import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.PropertyNamingStrategy;
 import org.codehaus.jackson.map.SerializationConfig;
+import org.codehaus.jackson.map.DeserializationConfig.Feature;
 import org.codehaus.jackson.type.JavaType;
 
 import com.lookfirst.wepay.api.WePayException;
@@ -84,6 +85,8 @@ public class WePayApi {
 		mapper.disable(SerializationConfig.Feature.FAIL_ON_EMPTY_BEANS);
 		// Makes for nice java property/method names
 		mapper.setPropertyNamingStrategy(PropertyNamingStrategy.CAMEL_CASE_TO_LOWER_CASE_WITH_UNDERSCORES);
+		// If wepay adds properties, we shouldn't blow up
+		mapper.configure(Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 	}
 
 	/** */

@@ -2,10 +2,11 @@ package com.lookfirst.wepay.api.req;
 
 import java.util.List;
 
-import com.lookfirst.wepay.api.CheckoutId;
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
+import com.lookfirst.wepay.api.Checkout.State;
+import com.lookfirst.wepay.api.CheckoutId;
 
 /**
  * https://stage.wepay.com/developer/reference/checkout
@@ -19,15 +20,15 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper=false)
 public class CheckoutFindRequest extends WePayRequest<List<CheckoutId>> {
 	/** The unique ID of the account whose checkouts you are searching. */
-	private String accountId;
+	private Long accountId;
 	/** The start position for your search (default 0). */
-	private String start;
+	private Integer start;
 	/** The maximum number of returned entries (default 50). */
-	private String limit;
+	private Integer limit;
 	/** The unique reference id of the checkout (set by the application in /checkout/create */
 	private String referenceId;
 	/** What state the checkout is in (see the Instant Payment Notifications reference for details). */
-	private String state;
+	private State state;
 
 	/** */
 	@Override

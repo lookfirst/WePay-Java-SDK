@@ -19,7 +19,7 @@ import lombok.EqualsAndHashCode;
 public class AccountDeleteRequest extends WePayRequest<AccountId> {
 
 	/** The unique ID of the account you want to look up. */
-	private String accountId;
+	private Long accountId;
 
 	/** */
 	@Override

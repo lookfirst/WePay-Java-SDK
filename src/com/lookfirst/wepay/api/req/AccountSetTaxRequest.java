@@ -19,7 +19,7 @@ import com.lookfirst.wepay.api.AccountTax;
 public class AccountSetTaxRequest extends WePayRequest<AccountTax> {
 
 	/** The unique ID of the account you want to look up. */
-	private String accountId;
+	private Long accountId;
 
 	/** An array of tax JSON objects. See below for the format tax objects should take. */
 	private String taxes;

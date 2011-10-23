@@ -19,7 +19,7 @@ import com.lookfirst.wepay.api.Checkout;
 public class CheckoutRequest extends WePayRequest<Checkout> {
 
 	/** The unique ID of the checkout you want to look up. */
-	private String checkoutId;
+	private Long checkoutId;
 
 	/** */
 	@Override

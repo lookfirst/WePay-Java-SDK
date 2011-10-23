@@ -19,7 +19,7 @@ import com.lookfirst.wepay.api.WePayAccount;
 public class AccountRequest extends WePayRequest<WePayAccount> {
 
 	/** The unique ID of the account you want to look up. */
-	private String accountId;
+	private Long accountId;
 
 	/** */
 	@Override

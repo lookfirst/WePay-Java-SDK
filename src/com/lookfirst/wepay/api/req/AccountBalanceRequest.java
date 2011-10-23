@@ -18,7 +18,7 @@ import lombok.EqualsAndHashCode;
 public class AccountBalanceRequest extends WePayRequest<AccountBalance> {
 
 	/** The name of the account you want the balance for. */
-	private String accountId;
+	private Long accountId;
 
 	/** */
 	@Override

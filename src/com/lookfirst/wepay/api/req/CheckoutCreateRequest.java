@@ -30,7 +30,7 @@ public class CheckoutCreateRequest extends WePayRequest<CheckoutUri> {
 	public static enum Type { GOODS, SERVICE, DONATION, PERSONAL }
 
 	/** The unique ID of the account you want to create a checkout for. */
-	private String accountId;
+	private Long accountId;
 	/** A short description of what is being paid for. */
 	private String shortDescription;
 	/** A long description of what is being paid for. */

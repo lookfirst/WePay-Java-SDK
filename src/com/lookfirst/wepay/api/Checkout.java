@@ -34,7 +34,7 @@ public class Checkout extends CheckoutUri {
 	public static enum FeePayer { Payer, Payee }
 
 	/** The unique ID of the payment account that the money will go into. */
-	private String accountId;
+	private Long accountId;
 	/** The state the checkout is in. See the section on IPN for a listing of all states. */
 	private State state;
 	/** The short description of the checkout. */

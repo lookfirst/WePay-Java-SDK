@@ -12,5 +12,5 @@ import lombok.Data;
 public class CheckoutId {
 
 	/** The unique ID of the checkout */
-	private String checkoutId;
+	private Long checkoutId;
 }

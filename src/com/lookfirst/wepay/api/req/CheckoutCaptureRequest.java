@@ -20,7 +20,7 @@ import lombok.EqualsAndHashCode;
 public class CheckoutCaptureRequest extends WePayRequest<CheckoutState> {
 
 	/** Yes	The unique ID of the checkout to be captured. */
-	private String checkoutId;
+	private Long checkoutId;
 
 	/** */
 	@Override

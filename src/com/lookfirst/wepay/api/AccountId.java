@@ -12,5 +12,5 @@ import lombok.Data;
 public class AccountId {
 
 	/** The unique ID of the account. */
-	private String accountId;
+	private Long accountId;
 }

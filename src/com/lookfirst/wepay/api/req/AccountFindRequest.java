@@ -2,10 +2,10 @@ package com.lookfirst.wepay.api.req;
 
 import java.util.List;
 
-import com.lookfirst.wepay.api.AccountUri;
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
+import com.lookfirst.wepay.api.WePayAccount;
 
 /**
  * https://stage.wepay.com/developer/reference/account
@@ -19,7 +19,7 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper=false)
-public class AccountFindRequest extends WePayRequest<List<AccountUri>> {
+public class AccountFindRequest extends WePayRequest<List<WePayAccount>> {
 
 	/** The name of the account you are searching for. */
 	private String name;

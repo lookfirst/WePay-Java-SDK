@@ -18,7 +18,7 @@ import lombok.EqualsAndHashCode;
 public class CheckoutCancelRequest extends WePayRequest<CheckoutState> {
 
 	/** Yes	The unique ID of the checkout to be canceled. */
-	private String checkoutId;
+	private Long checkoutId;
 	/** Yes	The reason the payment is being cancelled. */
 	private String cancelReason;
 

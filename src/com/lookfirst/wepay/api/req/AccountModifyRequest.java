@@ -18,7 +18,7 @@ import lombok.EqualsAndHashCode;
 public class AccountModifyRequest extends WePayRequest<AccountUri> {
 
 	/** The unique ID of the account you want to modify. */
-	private String accountId;
+	private Long accountId;
 	/** The name of the account you want to modify. */
 	private String name;
 	/** The description of the account you want to modify. */

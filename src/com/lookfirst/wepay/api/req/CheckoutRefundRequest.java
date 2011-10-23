@@ -18,7 +18,7 @@ import lombok.EqualsAndHashCode;
 public class CheckoutRefundRequest extends WePayRequest<CheckoutState> {
 
 	/** Yes	The unique ID of the checkout to be refunded. */
-	private String checkoutId;
+	private Long checkoutId;
 	/** Yes	The reason the payment is being refunded. */
 	private String refundReason;
 

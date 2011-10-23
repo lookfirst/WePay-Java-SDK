@@ -24,4 +24,9 @@ public class WePayUserResponse extends WePayResponse {
 	private String email;
 	/** Either "registered" if the user has registered, or "pending" if the user still needs to confirm their registration */
 	private String state;
+
+	/** Either "registered" if the user has registered, or "pending" if the user still needs to confirm their registration */
+	public boolean isRegistered() {
+		return state != null && state.equals("registered");
+	}
 }

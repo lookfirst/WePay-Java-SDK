@@ -1,19 +1,22 @@
-package com.lookfirst.wepay.api;
+package com.lookfirst.wepay.api.req;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import com.lookfirst.wepay.api.WePayAccount;
+
 /**
  * https://stage.wepay.com/developer/reference/account
  *
- * This call lets you get the tax rates for an account. They will be in the same format as detailed in the /account/set_tax call.
+ * This call allows you to lookup the details of the a payment account on WePay.
+ * The payment account must belong to the user associated with the access token used to make the call.
  *
  * @author Jon Scott Stevens
  * @author Jeff Schnitzer
  */
 @Data
 @EqualsAndHashCode(callSuper=false)
-public class AccountGetTaxRequest extends WePayRequest<AccountTax> {
+public class AccountRequest extends WePayRequest<WePayAccount> {
 
 	/** The unique ID of the account you want to look up. */
 	private String accountId;
@@ -21,6 +24,6 @@ public class AccountGetTaxRequest extends WePayRequest<AccountTax> {
 	/** */
 	@Override
 	public String getEndpoint() {
-		return "/account/get_tax";
+		return "/account";
 	}
 }

@@ -16,7 +16,7 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper=false)
-public class DisbursementDetails {
+public class Disbursement {
 
 	/** The unique ID of the disbursement. */
 	private String disbursementId;

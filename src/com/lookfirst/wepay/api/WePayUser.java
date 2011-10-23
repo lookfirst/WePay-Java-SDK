@@ -9,7 +9,7 @@ import lombok.Data;
  * @author Jeff Schnitzer
  */
 @Data
-public class UserDetails {
+public class WePayUser {
 
 	/** The unique ID of the user. */
 	private String userId;

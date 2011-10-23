@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
  */
 @Data
 @EqualsAndHashCode(callSuper=false)
-public class CheckoutDetails extends CheckoutUri {
+public class Checkout extends CheckoutUri {
 
 	public static enum FeePayer { Payer, Payee }
 

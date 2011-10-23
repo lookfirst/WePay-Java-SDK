@@ -2,6 +2,8 @@ package com.lookfirst.wepay.api;
 
 import java.util.List;
 
+import com.lookfirst.wepay.api.req.WePayRequest;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -15,7 +17,7 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper=false)
-public class DisbursmentFind extends WePayRequest<List<DisbursementDetails>> {
+public class DisbursmentFind extends WePayRequest<List<Disbursement>> {
 
 	/** Yes	The unique ID of the account you want to look up disbursements for. */
 	private String accountId;

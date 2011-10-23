@@ -1,9 +1,10 @@
-package com.lookfirst.wepay.api;
+package com.lookfirst.wepay.api.req;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import com.lookfirst.wepay.api.CheckoutDetails.FeePayer;
+import com.lookfirst.wepay.api.Checkout.FeePayer;
+import com.lookfirst.wepay.api.CheckoutUri;
 
 /**
  * https://stage.wepay.com/developer/reference/checkout

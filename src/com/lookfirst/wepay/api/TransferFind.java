@@ -2,6 +2,8 @@ package com.lookfirst.wepay.api;
 
 import java.util.List;
 
+import com.lookfirst.wepay.api.req.WePayRequest;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

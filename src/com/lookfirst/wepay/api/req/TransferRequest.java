@@ -1,7 +1,9 @@
-package com.lookfirst.wepay.api;
+package com.lookfirst.wepay.api.req;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
+import com.lookfirst.wepay.api.Transfer;
 
 /**
  * https://stage.wepay.com/developer/reference/disbursement
@@ -14,7 +16,7 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper=false)
-public class TransferDetailsRequest extends WePayRequest<Transfer> {
+public class TransferRequest extends WePayRequest<Transfer> {
 
 	/** Yes	The unique ID of the transfer you want to look up. */
 	private String transferId;

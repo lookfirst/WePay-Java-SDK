@@ -1,6 +1,9 @@
-package com.lookfirst.wepay.api;
+package com.lookfirst.wepay.api.req;
 
 import java.util.List;
+
+import com.lookfirst.wepay.api.Disbursement;
+import com.lookfirst.wepay.api.TransferInstruction;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -17,7 +20,7 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper=false)
-public class DisbursmentCreateRequest extends WePayRequest<DisbursementDetails> {
+public class DisbursmentCreateRequest extends WePayRequest<Disbursement> {
 
 	/** Yes	The unique ID of the account you want to look up disbursements for. */
 	private String accountId;
@@ -33,7 +36,7 @@ public class DisbursmentCreateRequest extends WePayRequest<DisbursementDetails> 
 	 * amount: Dollar amount to send to the email.
 	 * reference_id: (optional) id to track the transfer.
 	 */
-	private List<TransferRequest> transfers;
+	private List<TransferInstruction> transfers;
 
 	/** */
 	@Override

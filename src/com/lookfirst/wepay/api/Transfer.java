@@ -11,7 +11,7 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper=true)
-public class Transfer extends TransferRequest {
+public class Transfer extends TransferInstruction {
 	/** The unique ID of the transfer. */
 	public String transferId;
 	/** The unique ID of the account the money is coming from. */

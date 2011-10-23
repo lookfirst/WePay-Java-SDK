@@ -12,7 +12,7 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper=false)
-public class AccountDetails extends AccountUri {
+public class WePayAccount extends AccountUri {
 
 	/** The name of the account. */
 	private String name;

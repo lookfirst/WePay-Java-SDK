@@ -1,4 +1,4 @@
-package com.lookfirst.wepay.api;
+package com.lookfirst.wepay.api.req;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 

@@ -1,7 +1,9 @@
-package com.lookfirst.wepay.api;
+package com.lookfirst.wepay.api.req;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
+import com.lookfirst.wepay.api.WePayUser;
 
 /**
  * https://stage.wepay.com/developer/reference/user
@@ -13,7 +15,7 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper=false)
-public class UserDetailsRequest extends WePayRequest<UserDetails> {
+public class UserRequest extends WePayRequest<WePayUser> {
 
 	/** */
 	@Override

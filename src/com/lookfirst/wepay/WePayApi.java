@@ -24,9 +24,9 @@ import org.codehaus.jackson.map.SerializationConfig;
 import org.codehaus.jackson.type.JavaType;
 
 import com.lookfirst.wepay.api.WePayException;
-import com.lookfirst.wepay.api.WePayRequest;
-import com.lookfirst.wepay.api.TokenRequest;
 import com.lookfirst.wepay.api.Token;
+import com.lookfirst.wepay.api.req.TokenRequest;
+import com.lookfirst.wepay.api.req.WePayRequest;
 
 /**
  * Implements a way to communicate with the WePayApi.

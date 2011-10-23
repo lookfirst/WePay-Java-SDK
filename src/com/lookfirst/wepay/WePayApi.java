@@ -138,7 +138,7 @@ public class WePayApi {
 	public WePayTokenResponse getToken(String code, String redirectUrl) throws WePayException {
 
 		WePayToken request = new WePayToken();
-		request.setClientId(key.getClientSecret());
+		request.setClientId(key.getClientId());
 		request.setClientSecret(key.getClientSecret());
 		request.setRedirectUri(redirectUrl);
 		request.setCode(code);

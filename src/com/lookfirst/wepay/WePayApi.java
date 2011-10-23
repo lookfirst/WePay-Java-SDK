@@ -166,7 +166,7 @@ public class WePayApi {
 			String post = mapper.writeValueAsString(req);
 
 			if (log.isTraceEnabled()) {
-				log.trace("request:  " + post);
+				log.trace("request to {}:  {}", uri, post);
 			}
 
 			HttpURLConnection conn = getConnection(uri, post, token);

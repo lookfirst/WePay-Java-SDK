@@ -4,7 +4,6 @@ import java.util.List;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.ToString;
 
 /**
  * https://stage.wepay.com/developer/reference/disbursement
@@ -16,9 +15,8 @@ import lombok.ToString;
  * @author Jeff Schnitzer
  */
 @Data
-@ToString
 @EqualsAndHashCode(callSuper=false)
-public class WePayDisbursementDetails {
+public class DisbursementDetails {
 
 	/** The unique ID of the disbursement. */
 	private String disbursementId;
@@ -31,5 +29,5 @@ public class WePayDisbursementDetails {
 	/** The state that the disbursement is in (new, sent, or failed). */
 	private String state;
 	/** The list of all transfers from the account to emails, including transfer information. See /transfer for a list of parameters in each transfer object. */
-	private List<WePayTransfer> transfers;
+	private List<Transfer> transfers;
 }

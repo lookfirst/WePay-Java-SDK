@@ -2,7 +2,6 @@ package com.lookfirst.wepay.api;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.ToString;
 
 /**
  * https://stage.wepay.com/developer/reference/checkout
@@ -13,9 +12,8 @@ import lombok.ToString;
  * @author Jeff Schnitzer
  */
 @Data
-@ToString
 @EqualsAndHashCode(callSuper=false)
-public class WePayCheckoutCancelRequest extends WePayRequest<WePayCheckoutState> {
+public class CheckoutCancelRequest extends WePayRequest<CheckoutState> {
 
 	/** Yes	The unique ID of the checkout to be canceled. */
 	private String checkoutId;

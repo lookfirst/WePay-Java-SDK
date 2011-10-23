@@ -1,7 +1,6 @@
 package com.lookfirst.wepay.api;
 
 import lombok.Data;
-import lombok.ToString;
 
 /**
  * https://stage.wepay.com/developer/reference/checkout
@@ -10,8 +9,7 @@ import lombok.ToString;
  * @author Jeff Schnitzer
  */
 @Data
-@ToString
-public class WePayCheckoutId {
+public class CheckoutId {
 
 	/** The unique ID of the checkout */
 	private String checkoutId;

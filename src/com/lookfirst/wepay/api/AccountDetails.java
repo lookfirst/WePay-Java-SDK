@@ -2,7 +2,6 @@ package com.lookfirst.wepay.api;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.ToString;
 
 
 /**
@@ -12,9 +11,8 @@ import lombok.ToString;
  * @author Jeff Schnitzer
  */
 @Data
-@ToString
 @EqualsAndHashCode(callSuper=false)
-public class WePayAccountDetails extends WePayAccountUri {
+public class AccountDetails extends AccountUri {
 
 	/** The name of the account. */
 	private String name;

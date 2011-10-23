@@ -2,7 +2,6 @@ package com.lookfirst.wepay.api;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.ToString;
 
 /**
  * https://stage.wepay.com/developer/reference/account
@@ -15,9 +14,8 @@ import lombok.ToString;
  * @author Jeff Schnitzer
  */
 @Data
-@ToString
 @EqualsAndHashCode(callSuper=false)
-public class WePayAccountCreateRequest extends WePayRequest<WePayAccountUri> {
+public class AccountCreateRequest extends WePayRequest<AccountUri> {
 
 	/** The name of the account you want to create. */
 	private String name;

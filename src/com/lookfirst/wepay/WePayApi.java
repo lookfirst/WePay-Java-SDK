@@ -25,8 +25,8 @@ import org.codehaus.jackson.type.JavaType;
 
 import com.lookfirst.wepay.api.WePayException;
 import com.lookfirst.wepay.api.WePayRequest;
-import com.lookfirst.wepay.api.WePayTokenRequest;
-import com.lookfirst.wepay.api.WePayToken;
+import com.lookfirst.wepay.api.TokenRequest;
+import com.lookfirst.wepay.api.Token;
 
 /**
  * Implements a way to communicate with the WePayApi.
@@ -141,9 +141,9 @@ public class WePayApi {
 	 * @param redirectUrl  Where user went after logging in at WePay (must match value from getAuthorizationUri)
 	 * @return json {"user_id":"123456","access_token":"1337h4x0rzabcd12345","token_type":"BEARER"}
 	 */
-	public WePayToken getToken(String code, String redirectUrl) throws WePayException {
+	public Token getToken(String code, String redirectUrl) throws WePayException {
 
-		WePayTokenRequest request = new WePayTokenRequest();
+		TokenRequest request = new TokenRequest();
 		request.setClientId(key.getClientId());
 		request.setClientSecret(key.getClientSecret());
 		request.setRedirectUri(redirectUrl);

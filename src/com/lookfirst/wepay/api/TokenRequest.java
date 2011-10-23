@@ -14,7 +14,7 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper=false)
-public class WePayTokenRequest extends WePayRequest<WePayToken> {
+public class TokenRequest extends WePayRequest<Token> {
 
 	public static final String ENDPOINT = "/oauth2/token";
 

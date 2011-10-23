@@ -4,7 +4,6 @@ import java.util.List;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.ToString;
 
 /**
  * https://stage.wepay.com/developer/reference/account
@@ -17,9 +16,8 @@ import lombok.ToString;
  * @author Jeff Schnitzer
  */
 @Data
-@ToString
 @EqualsAndHashCode(callSuper=false)
-public class WePayAccountFindRequest extends WePayRequest<List<WePayAccountUri>> {
+public class AccountFindRequest extends WePayRequest<List<AccountUri>> {
 
 	/** The name of the account you are searching for. */
 	private String name;

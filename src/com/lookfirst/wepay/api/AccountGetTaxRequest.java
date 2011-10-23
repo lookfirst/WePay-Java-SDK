@@ -2,21 +2,18 @@ package com.lookfirst.wepay.api;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.ToString;
 
 /**
  * https://stage.wepay.com/developer/reference/account
  *
- * Deletes the account specified. The use associated with the access token used must have permission to delete the account.
- * An account may not be deleted if it has a balance, pending bills, pending payments, or has ordered a debit card.
+ * This call lets you get the tax rates for an account. They will be in the same format as detailed in the /account/set_tax call.
  *
  * @author Jon Scott Stevens
  * @author Jeff Schnitzer
  */
 @Data
-@ToString
 @EqualsAndHashCode(callSuper=false)
-public class WePayAccountDeleteRequest extends WePayRequest<WePayAccountId> {
+public class AccountGetTaxRequest extends WePayRequest<AccountTax> {
 
 	/** The unique ID of the account you want to look up. */
 	private String accountId;
@@ -24,6 +21,6 @@ public class WePayAccountDeleteRequest extends WePayRequest<WePayAccountId> {
 	/** */
 	@Override
 	public String getEndpoint() {
-		return "/account/delete";
+		return "/account/get_tax";
 	}
 }

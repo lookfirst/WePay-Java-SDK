@@ -1,8 +1,6 @@
 package com.lookfirst.wepay.api;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 /**
  * Data object used in disbursements and transfers.  This is not actually a Request object
@@ -12,9 +10,7 @@ import lombok.NoArgsConstructor;
  * @author Jeff Schnitzer
  */
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class WePayTransferRequest {
+public class TransferRequest {
 	/** The email address that the money is being sent to. */
 	public String to;
 	/** The dollar amount on money that is being sent. */

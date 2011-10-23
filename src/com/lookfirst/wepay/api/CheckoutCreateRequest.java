@@ -2,9 +2,8 @@ package com.lookfirst.wepay.api;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.ToString;
 
-import com.lookfirst.wepay.api.WePayCheckoutDetails.FeePayer;
+import com.lookfirst.wepay.api.CheckoutDetails.FeePayer;
 
 /**
  * https://stage.wepay.com/developer/reference/checkout
@@ -21,9 +20,8 @@ import com.lookfirst.wepay.api.WePayCheckoutDetails.FeePayer;
  * @author Jeff Schnitzer
  */
 @Data
-@ToString
 @EqualsAndHashCode(callSuper=false)
-public class WePayCheckoutCreateRequest extends WePayRequest<WePayCheckoutUri> {
+public class CheckoutCreateRequest extends WePayRequest<CheckoutUri> {
 
 	public static enum Mode { iframe, regular }
 	public static enum Type { GOODS, SERVICE, DONATION, PERSONAL }

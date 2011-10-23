@@ -2,7 +2,6 @@ package com.lookfirst.wepay.api;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.ToString;
 
 /**
  * https://stage.wepay.com/developer/reference/account
@@ -13,9 +12,8 @@ import lombok.ToString;
  * @author Jeff Schnitzer
  */
 @Data
-@ToString
 @EqualsAndHashCode(callSuper=false)
-public class WePayAccountModifyRequest extends WePayRequest<WePayAccountUri> {
+public class AccountModifyRequest extends WePayRequest<AccountUri> {
 
 	/** The unique ID of the account you want to modify. */
 	private String accountId;

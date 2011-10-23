@@ -1,7 +1,6 @@
 package com.lookfirst.wepay.api;
 
 import lombok.Data;
-import lombok.ToString;
 
 /**
  * Once you have sent the user through the authorization end point and they have returned with a code,
@@ -12,8 +11,7 @@ import lombok.ToString;
  * @author Jeff Schnitzer
  */
 @Data
-@ToString
-public class WePayToken  {
+public class Token  {
 
 	/** The unique user ID of the user */
 	private String userId;

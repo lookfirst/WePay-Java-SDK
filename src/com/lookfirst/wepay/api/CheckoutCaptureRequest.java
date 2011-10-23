@@ -15,7 +15,7 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper=false)
-public class WePayCheckoutCaptureRequest extends WePayRequest<WePayCheckoutState> {
+public class CheckoutCaptureRequest extends WePayRequest<CheckoutState> {
 
 	/** Yes	The unique ID of the checkout to be captured. */
 	private String checkoutId;

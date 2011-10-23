@@ -2,7 +2,6 @@ package com.lookfirst.wepay.api;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
 
 /**
  * Data object used in disbursements and transfers
@@ -12,8 +11,7 @@ import lombok.NoArgsConstructor;
  */
 @Data
 @EqualsAndHashCode(callSuper=true)
-@NoArgsConstructor
-public class WePayTransfer extends WePayTransferRequest {
+public class Transfer extends TransferRequest {
 	/** The unique ID of the transfer. */
 	public String transferId;
 	/** The unique ID of the account the money is coming from. */

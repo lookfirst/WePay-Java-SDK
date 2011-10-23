@@ -1,7 +1,6 @@
 package com.lookfirst.wepay.api;
 
 import lombok.Data;
-import lombok.ToString;
 
 /**
  * https://stage.wepay.com/developer/reference/user
@@ -10,8 +9,7 @@ import lombok.ToString;
  * @author Jeff Schnitzer
  */
 @Data
-@ToString
-public class WePayUserDetails {
+public class UserDetails {
 
 	/** The unique ID of the user. */
 	private String userId;

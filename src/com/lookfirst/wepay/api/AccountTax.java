@@ -1,7 +1,6 @@
 package com.lookfirst.wepay.api;
 
 import lombok.Data;
-import lombok.ToString;
 
 /**
  * https://stage.wepay.com/developer/reference/account
@@ -10,8 +9,7 @@ import lombok.ToString;
  * @author Jeff Schnitzer
  */
 @Data
-@ToString
-public class WePayAccountTax {
+public class AccountTax {
 
 	/** The tax tables for the account. */
 	private String taxes;

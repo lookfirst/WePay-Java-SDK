@@ -4,30 +4,29 @@ import java.util.List;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.ToString;
 
 /**
  * https://stage.wepay.com/developer/reference/disbursement
  *
- * This call allows you to find transfers associated with an account.
+ * This call allows you to find disbursements.
  *
  * @author Jon Scott Stevens
  * @author Jeff Schnitzer
  */
 @Data
-@ToString
 @EqualsAndHashCode(callSuper=false)
-public class WePayTransferFind extends WePayRequest<List<WePayTransfer>> {
+public class DisbursmentFind extends WePayRequest<List<DisbursementDetails>> {
 
+	/** Yes	The unique ID of the account you want to look up disbursements for. */
 	private String accountId;
+	/** No	The reference_id on the disbursement object (set in /disbursement/create). */
 	private String referenceId;
-	private String disbursementId;
+	/** No	The state the disbursement is in (new, sent, or failed). */
 	private String state;
-	private String to;
 
 	/** */
 	@Override
 	public String getEndpoint() {
-		return "/transfer/find";
+		return "/disbursement/find";
 	}
 }

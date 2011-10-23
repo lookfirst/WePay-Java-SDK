@@ -2,7 +2,6 @@ package com.lookfirst.wepay.api;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.ToString;
 
 /**
  * https://stage.wepay.com/developer/reference/disbursement
@@ -14,9 +13,8 @@ import lombok.ToString;
  * @author Jeff Schnitzer
  */
 @Data
-@ToString
 @EqualsAndHashCode(callSuper=false)
-public class WePayDisbursmentDetails extends WePayRequest<WePayDisbursementDetails> {
+public class DisbursmentDetails extends WePayRequest<DisbursementDetails> {
 
 	/** Yes	The unique ID of the disbursement you want to look up. */
 	private String disbursementId;

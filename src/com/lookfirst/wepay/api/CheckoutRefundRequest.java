@@ -13,7 +13,7 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper=false)
-public class WePayCheckoutRefundRequest extends WePayRequest<WePayCheckoutState> {
+public class CheckoutRefundRequest extends WePayRequest<CheckoutState> {
 
 	/** Yes	The unique ID of the checkout to be refunded. */
 	private String checkoutId;

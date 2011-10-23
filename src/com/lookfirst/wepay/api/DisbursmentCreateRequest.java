@@ -4,7 +4,6 @@ import java.util.List;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.ToString;
 
 /**
  * https://stage.wepay.com/developer/reference/disbursement
@@ -17,9 +16,8 @@ import lombok.ToString;
  * @author Jeff Schnitzer
  */
 @Data
-@ToString
 @EqualsAndHashCode(callSuper=false)
-public class WePayDisbursmentCreateRequest extends WePayRequest<WePayDisbursementDetails> {
+public class DisbursmentCreateRequest extends WePayRequest<DisbursementDetails> {
 
 	/** Yes	The unique ID of the account you want to look up disbursements for. */
 	private String accountId;
@@ -35,7 +33,7 @@ public class WePayDisbursmentCreateRequest extends WePayRequest<WePayDisbursemen
 	 * amount: Dollar amount to send to the email.
 	 * reference_id: (optional) id to track the transfer.
 	 */
-	private List<WePayTransferRequest> transfers;
+	private List<TransferRequest> transfers;
 
 	/** */
 	@Override

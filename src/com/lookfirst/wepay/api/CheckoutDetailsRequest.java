@@ -2,7 +2,6 @@ package com.lookfirst.wepay.api;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.ToString;
 
 /**
  * https://stage.wepay.com/developer/reference/checkout
@@ -14,9 +13,8 @@ import lombok.ToString;
  * @author Jeff Schnitzer
  */
 @Data
-@ToString
 @EqualsAndHashCode(callSuper=false)
-public class WePayCheckoutDetailsRequest extends WePayRequest<WePayCheckoutDetails> {
+public class CheckoutDetailsRequest extends WePayRequest<CheckoutDetails> {
 
 	/** The unique ID of the checkout you want to look up. */
 	private String checkoutId;

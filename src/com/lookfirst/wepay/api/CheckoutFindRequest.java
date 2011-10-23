@@ -4,7 +4,6 @@ import java.util.List;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.ToString;
 
 /**
  * https://stage.wepay.com/developer/reference/checkout
@@ -15,9 +14,8 @@ import lombok.ToString;
  * @author Jeff Schnitzer
  */
 @Data
-@ToString
 @EqualsAndHashCode(callSuper=false)
-public class WePayCheckoutFindRequest extends WePayRequest<List<WePayCheckoutId>> {
+public class CheckoutFindRequest extends WePayRequest<List<CheckoutId>> {
 	/** The unique ID of the account whose checkouts you are searching. */
 	private String accountId;
 	/** The start position for your search (default 0). */

@@ -2,7 +2,6 @@ package com.lookfirst.wepay.api;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.ToString;
 
 /**
  * https://stage.wepay.com/developer/reference/checkout
@@ -12,8 +11,7 @@ import lombok.ToString;
  */
 @Data
 @EqualsAndHashCode(callSuper=true)
-@ToString
-public class WePayCheckoutState extends WePayCheckoutId {
+public class CheckoutState extends CheckoutId {
 
 	/** The state the payment is in. See the IPN section for a list of payment states. */
 	private String state;

@@ -13,7 +13,7 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper=false)
-public class WePayUserDetailsRequest extends WePayRequest<WePayUserDetails> {
+public class UserDetailsRequest extends WePayRequest<UserDetails> {
 
 	/** */
 	@Override

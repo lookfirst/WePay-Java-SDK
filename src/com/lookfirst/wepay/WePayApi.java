@@ -164,14 +164,14 @@ public class WePayApi {
 
 		try {
 			String post = mapper.writeValueAsString(req);
-			
+
 			if (log.isTraceEnabled()) {
 				log.trace("request:  " + post);
 			}
-			
+
 			HttpURLConnection conn = getConnection(uri, post, token);
 			InputStream is = conn.getInputStream();
-			
+
 			if (log.isTraceEnabled()) {
 				String results = IOUtils.toString(is);
 				log.trace("response: " + results);
@@ -179,19 +179,19 @@ public class WePayApi {
 			} else {
 				resp = mapper.readTree(is);
 			}
-			
+
 			// if there is an error in the response from wepay, it'll get thrown in this call.
 			this.checkForError(resp);
-			
+
 			// This is a little bit of black magic with jackson.  We know that any request passed extends
 			// the abstract WePayRequest and de-genericizes it.  This means the concrete class has full
 			// generic type information, and we can use this to determine what type to deserialize.  The
 			// trickiest case is WePayAccountFindRequest, whose response type is List<AccountWithUri>.
 			ParameterizedType paramType = (ParameterizedType)req.getClass().getGenericSuperclass();
 			JavaType type = mapper.constructType(paramType.getActualTypeArguments()[0]);
-			
+
 			return mapper.readValue(resp, type);
-			
+
 		} catch (IOException e) {
 			throw new WePayException(e.getMessage(), e);
 		}
@@ -206,7 +206,7 @@ public class WePayApi {
 		if (resp.get("error") != null)
 			throw new WePayException(resp.path("error").asText() + " : " + resp.path("error_description").asText());
 	}
-	
+
 	/**
 	 * Common functionality for posting data.
 	 *
@@ -240,7 +240,7 @@ public class WePayApi {
 	/**
 	 * An interface to URLEncoder.encode() that isn't inane
 	 */
-	private static String urlEncode(Object value)
+	private String urlEncode(Object value)
 	{
 		try
 		{

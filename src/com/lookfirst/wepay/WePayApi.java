@@ -11,7 +11,9 @@ import java.util.List;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.PropertyNamingStrategy;
@@ -30,7 +32,7 @@ import com.lookfirst.wepay.api.WePayTokenResponse;
  *
  * @author Jon Scott Stevens
  */
-//@Slf4j
+@Slf4j
 public class WePayApi {
 
 	/**
@@ -147,7 +149,8 @@ public class WePayApi {
 	}
 
 	/**
-	 * Make API calls against authenticated user
+	 * Make API calls against authenticated user.
+	 * Turn up logging to trace level to see the request / response.
 	 */
 	public <T extends WePayResponse> T execute(String token, WePayRequest<T> req) throws WePayException {
 
@@ -157,9 +160,18 @@ public class WePayApi {
 
 		try {
 			String post = mapper.writeValueAsString(req);
+			if (log.isTraceEnabled()) {
+				log.trace("request:  " + post);
+			}
 			HttpURLConnection conn = getConnection(uri, post, token);
 			InputStream is = conn.getInputStream();
-			resp = mapper.readValue(is, req.getResponseClass());
+			if (log.isTraceEnabled()) {
+				String results = IOUtils.toString(is);
+				log.trace("response: " + results);
+				resp = mapper.readValue(results, req.getResponseClass());
+			} else {
+				resp = mapper.readValue(is, req.getResponseClass());
+			}
 		} catch (Exception e) {
 			throw new WePayException(e.getMessage(), e);
 		}

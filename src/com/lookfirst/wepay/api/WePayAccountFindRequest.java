@@ -1,5 +1,7 @@
 package com.lookfirst.wepay.api;
 
+import java.util.List;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -12,21 +14,17 @@ import lombok.ToString;
  * If both name and reference_id are blank, this will return an array of all of the user's accounts.
  *
  * @author Jon Scott Stevens
+ * @author Jeff Schnitzer
  */
 @Data
 @ToString
 @EqualsAndHashCode(callSuper=false)
-public class WePayAccountFind extends WePayRequest<WePayAccountFindResponse> {
+public class WePayAccountFindRequest extends WePayRequest<List<WePayAccountUri>> {
 
 	/** The name of the account you are searching for. */
 	private String name;
 	/** The reference ID of the account you are searching for (set by the app in in /account/create or account/modify). */
 	private String referenceId;
-
-	/** */
-	public WePayAccountFind() {
-		super(WePayAccountFindResponse.class);
-	}
 
 	/** */
 	@Override

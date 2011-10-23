@@ -1,5 +1,7 @@
 package com.lookfirst.wepay.api;
 
+import java.util.List;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -10,11 +12,12 @@ import lombok.ToString;
  * This call allows you to search for checkouts associated with an account. Returns an array of matching checkout IDs.
  *
  * @author Jon Scott Stevens
+ * @author Jeff Schnitzer
  */
 @Data
 @ToString
 @EqualsAndHashCode(callSuper=false)
-public class WePayCheckoutFind extends WePayRequest<WePayCheckoutFindResponse> {
+public class WePayCheckoutFindRequest extends WePayRequest<List<WePayCheckoutId>> {
 	/** The unique ID of the account whose checkouts you are searching. */
 	private String accountId;
 	/** The start position for your search (default 0). */
@@ -25,11 +28,6 @@ public class WePayCheckoutFind extends WePayRequest<WePayCheckoutFindResponse> {
 	private String referenceId;
 	/** What state the checkout is in (see the Instant Payment Notifications reference for details). */
 	private String state;
-
-	/** */
-	public WePayCheckoutFind() {
-		super(WePayCheckoutFindResponse.class);
-	}
 
 	/** */
 	@Override

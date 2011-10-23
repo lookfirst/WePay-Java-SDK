@@ -11,19 +11,15 @@ import lombok.ToString;
  * of monetary transfers from a WePay account to an email address.
  *
  * @author Jon Scott Stevens
+ * @author Jeff Schnitzer
  */
 @Data
 @ToString
 @EqualsAndHashCode(callSuper=false)
-public class WePayDisbursmentDetails extends WePayRequest<WePayDisbursementDetailsResponse> {
+public class WePayDisbursmentDetails extends WePayRequest<WePayDisbursementDetails> {
 
 	/** Yes	The unique ID of the disbursement you want to look up. */
 	private String disbursementId;
-
-	/** */
-	public WePayDisbursmentDetails() {
-		super(WePayDisbursementDetailsResponse.class);
-	}
 
 	/** */
 	@Override

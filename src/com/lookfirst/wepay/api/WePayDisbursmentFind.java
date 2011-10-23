@@ -1,5 +1,7 @@
 package com.lookfirst.wepay.api;
 
+import java.util.List;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -10,11 +12,12 @@ import lombok.ToString;
  * This call allows you to find disbursements.
  *
  * @author Jon Scott Stevens
+ * @author Jeff Schnitzer
  */
 @Data
 @ToString
 @EqualsAndHashCode(callSuper=false)
-public class WePayDisbursmentFind extends WePayRequest<WePayDisbursementFindResponse> {
+public class WePayDisbursmentFind extends WePayRequest<List<WePayDisbursementDetails>> {
 
 	/** Yes	The unique ID of the account you want to look up disbursements for. */
 	private String accountId;
@@ -22,11 +25,6 @@ public class WePayDisbursmentFind extends WePayRequest<WePayDisbursementFindResp
 	private String referenceId;
 	/** No	The state the disbursement is in (new, sent, or failed). */
 	private String state;
-
-	/** */
-	public WePayDisbursmentFind() {
-		super(WePayDisbursementFindResponse.class);
-	}
 
 	/** */
 	@Override

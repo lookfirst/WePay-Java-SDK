@@ -1,8 +1,10 @@
 package com.lookfirst.wepay;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.ParameterizedType;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
@@ -15,15 +17,16 @@ import lombok.extern.slf4j.Slf4j;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.PropertyNamingStrategy;
 import org.codehaus.jackson.map.SerializationConfig;
+import org.codehaus.jackson.type.JavaType;
 
+import com.lookfirst.wepay.api.WePayException;
 import com.lookfirst.wepay.api.WePayRequest;
-import com.lookfirst.wepay.api.WePayResponse;
-import com.lookfirst.wepay.api.WePayResponse.WePayException;
+import com.lookfirst.wepay.api.WePayTokenRequest;
 import com.lookfirst.wepay.api.WePayToken;
-import com.lookfirst.wepay.api.WePayTokenResponse;
 
 /**
  * Implements a way to communicate with the WePayApi.
@@ -31,6 +34,7 @@ import com.lookfirst.wepay.api.WePayTokenResponse;
  * https://www.wepay.com/developer/reference
  *
  * @author Jon Scott Stevens
+ * @author Jeff Schnitzer
  */
 @Slf4j
 public class WePayApi {
@@ -137,9 +141,9 @@ public class WePayApi {
 	 * @param redirectUrl  Where user went after logging in at WePay (must match value from getAuthorizationUri)
 	 * @return json {"user_id":"123456","access_token":"1337h4x0rzabcd12345","token_type":"BEARER"}
 	 */
-	public WePayTokenResponse getToken(String code, String redirectUrl) throws WePayException {
+	public WePayToken getToken(String code, String redirectUrl) throws WePayException {
 
-		WePayToken request = new WePayToken();
+		WePayTokenRequest request = new WePayTokenRequest();
 		request.setClientId(key.getClientId());
 		request.setClientSecret(key.getClientSecret());
 		request.setRedirectUri(redirectUrl);
@@ -152,42 +156,63 @@ public class WePayApi {
 	 * Make API calls against authenticated user.
 	 * Turn up logging to trace level to see the request / response.
 	 */
-	public <T extends WePayResponse> T execute(String token, WePayRequest<T> req) throws WePayException {
+	public <T> T execute(String token, WePayRequest<T> req) throws WePayException {
 
 		String uri = CURRENT_URL + req.getEndpoint();
 
-		T resp = null;
+		JsonNode resp = null;
 
 		try {
 			String post = mapper.writeValueAsString(req);
+			
 			if (log.isTraceEnabled()) {
 				log.trace("request:  " + post);
 			}
+			
 			HttpURLConnection conn = getConnection(uri, post, token);
 			InputStream is = conn.getInputStream();
+			
 			if (log.isTraceEnabled()) {
 				String results = IOUtils.toString(is);
 				log.trace("response: " + results);
-				resp = mapper.readValue(results, req.getResponseClass());
+				resp = mapper.readTree(results);
 			} else {
-				resp = mapper.readValue(is, req.getResponseClass());
+				resp = mapper.readTree(is);
 			}
-		} catch (Exception e) {
+			
+			// if there is an error in the response from wepay, it'll get thrown in this call.
+			this.checkForError(resp);
+			
+			// This is a little bit of black magic with jackson.  We know that any request passed extends
+			// the abstract WePayRequest and de-genericizes it.  This means the concrete class has full
+			// generic type information, and we can use this to determine what type to deserialize.  The
+			// trickiest case is WePayAccountFindRequest, whose response type is List<AccountWithUri>.
+			ParameterizedType paramType = (ParameterizedType)req.getClass().getGenericSuperclass();
+			JavaType type = mapper.constructType(paramType.getActualTypeArguments()[0]);
+			
+			return mapper.readValue(resp, type);
+			
+		} catch (IOException e) {
 			throw new WePayException(e.getMessage(), e);
 		}
-
-		// if there is an error in the response from wepay, it'll get thrown in this call.
-		resp.checkError();
-
-		return resp;
 	}
 
+	/**
+	 * If the response node is recognized as an error, throw a WePayException
+	 * @throws WePayException if the node is an error node
+	 */
+	private void checkForError(JsonNode resp) throws WePayException
+	{
+		if (resp.get("error") != null)
+			throw new WePayException(resp.path("error").asText() + " : " + resp.path("error_description").asText());
+	}
+	
 	/**
 	 * Common functionality for posting data.
 	 *
 	 * WePay's API is not strictly RESTful, so all requests are sent as POST unless there are no request values
 	 */
-	private HttpURLConnection getConnection(String uri, String postJson, String token) throws Exception {
+	private HttpURLConnection getConnection(String uri, String postJson, String token) throws IOException {
 
 		URL url = new URL(uri);
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();

@@ -1,20 +1,18 @@
 package com.lookfirst.wepay.api;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 /**
  * https://stage.wepay.com/developer/reference/checkout
  *
  * @author Jon Scott Stevens
+ * @author Jeff Schnitzer
  */
 @Data
 @ToString
-@EqualsAndHashCode(callSuper=false)
-public class WePayCheckoutFindResponse extends WePayResponse {
+public class WePayCheckoutId {
 
-	/** The unique ID of the checkout. */
+	/** The unique ID of the checkout */
 	private String checkoutId;
-
 }

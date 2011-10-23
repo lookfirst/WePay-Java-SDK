@@ -11,19 +11,15 @@ import lombok.ToString;
  * An account may not be deleted if it has a balance, pending bills, pending payments, or has ordered a debit card.
  *
  * @author Jon Scott Stevens
+ * @author Jeff Schnitzer
  */
 @Data
 @ToString
 @EqualsAndHashCode(callSuper=false)
-public class WePayAccountDelete extends WePayRequest<WePayAccountDeleteResponse> {
+public class WePayAccountDeleteRequest extends WePayRequest<WePayAccountId> {
 
 	/** The unique ID of the account you want to look up. */
 	private String accountId;
-
-	/** */
-	public WePayAccountDelete() {
-		super(WePayAccountDeleteResponse.class);
-	}
 
 	/** */
 	@Override

@@ -1,19 +1,18 @@
 package com.lookfirst.wepay.api;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 /**
  * https://stage.wepay.com/developer/reference/account
  *
  * @author Jon Scott Stevens
+ * @author Jeff Schnitzer
  */
 @Data
 @ToString
-@EqualsAndHashCode(callSuper=false)
-public class WePayAccountSetTaxResponse extends WePayResponse {
+public class WePayAccountTax {
 
-	/** A copy of the taxes argument that you passed in the request. */
+	/** The tax tables for the account. */
 	private String taxes;
 }

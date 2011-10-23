@@ -12,11 +12,12 @@ import lombok.ToString;
  * NOTE: You cannot create an account with the word 'wepay' in it. This is to prevent phishing attacks.
  *
  * @author Jon Scott Stevens
+ * @author Jeff Schnitzer
  */
 @Data
 @ToString
 @EqualsAndHashCode(callSuper=false)
-public class WePayAccountCreate extends WePayRequest<WePayAccountCreateResponse> {
+public class WePayAccountCreateRequest extends WePayRequest<WePayAccountUri> {
 
 	/** The name of the account you want to create. */
 	private String name;
@@ -26,11 +27,6 @@ public class WePayAccountCreate extends WePayRequest<WePayAccountCreateResponse>
 	private String referenceId;
 	/** The uri for an image that you want to use for the accounts icon. This image will be used in the co-branded checkout process. */
 	private String imageUri;
-
-	/** */
-	public WePayAccountCreate() {
-		super(WePayAccountCreateResponse.class);
-	}
 
 	/** */
 	@Override

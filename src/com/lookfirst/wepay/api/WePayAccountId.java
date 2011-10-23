@@ -1,21 +1,18 @@
 package com.lookfirst.wepay.api;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 /**
  * https://stage.wepay.com/developer/reference/account
  *
  * @author Jon Scott Stevens
+ * @author Jeff Schnitzer
  */
 @Data
 @ToString
-@EqualsAndHashCode(callSuper=false)
-public class WePayAccountModifyResponse extends WePayResponse {
+public class WePayAccountId {
 
 	/** The unique ID of the account. */
 	private String accountId;
-	/** A uri that corresponds to the account's page on WePay. */
-	private String accountUri;
 }

@@ -1,5 +1,7 @@
 package com.lookfirst.wepay.api.req;
 
+import java.math.BigDecimal;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -40,9 +42,9 @@ public class CheckoutCreateRequest extends WePayRequest<CheckoutUri> {
 	/** The unique reference id of the checkout (set by the application in /checkout/create */
 	private String referenceId;
 	/** The amount that the payer will pay. */
-	private String amount;
+	private BigDecimal amount;
 	/** The amount that the application will receive in fees. App fees go into the API applications WePay account. */
-	private String appFee;
+	private BigDecimal appFee;
 	/** Who will pay the fees (WePay's fees and any app fees). Set to "Payer" to charge fees to the person paying (Payer will pay amount + fees, payee will receive amount). Set to "Payee" to charge fees to the person receiving money (Payer will pay amount, Payee will receive amount - fees). Defaults to "Payer". */
 	private FeePayer feePayer;
 	/** The uri the payer will be redirected to after paying. */
@@ -54,7 +56,7 @@ public class CheckoutCreateRequest extends WePayRequest<CheckoutUri> {
 	/** A boolean value (0 or 1). If set to 1 then the payer will be asked to enter a shipping address when they pay. After payment you can retrieve this shipping address by calling /checkout */
 	private boolean requireShipping;
 	/** The amount that you want to charge for shipping. */
-	private String shippingFee;
+	private BigDecimal shippingFee;
 	/** A boolean value (0 or 1). If set to 1 and the account has a relevant tax entry (see /account/set_tax), then tax will be charged. */
 	private boolean chargeTax;
 	/** What mode the checkout will be displayed in. The options are 'iframe' or 'regular'. Choose 'iframe' if this is an iframe checkout. Mode defaults to 'regular'. */

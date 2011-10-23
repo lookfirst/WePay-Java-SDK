@@ -1,5 +1,7 @@
 package com.lookfirst.wepay.api;
 
+import java.math.BigDecimal;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -15,12 +17,26 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper=false)
 public class Checkout extends CheckoutUri {
 
+	public static enum State {
+		New,
+		Authorized,
+		Started,
+		Reserved,
+		Captured,
+		Settled,
+		Cancelled,
+		Refunded,
+		Charged_back,
+		Failed,
+		Expired
+	}
+	
 	public static enum FeePayer { Payer, Payee }
 
 	/** The unique ID of the payment account that the money will go into. */
 	private String accountId;
 	/** The state the checkout is in. See the section on IPN for a listing of all states. */
-	private String state;
+	private State state;
 	/** The short description of the checkout. */
 	private String shortDescription;
 	/** The long description of the checkout (if available). */
@@ -28,13 +44,13 @@ public class Checkout extends CheckoutUri {
 	/** The currency used (always USD for now). */
 	private String currency;
 	/** The dollar amount of the checkout object. This will always be the amount you passed in /checkout/create */
-	private String amount;
+	private BigDecimal amount;
 	/** The dollar amount of the WePay fee. */
-	private String fee;
+	private BigDecimal fee;
 	/** The total dollar amount paid by the payer. */
-	private String gross;
+	private BigDecimal gross;
 	/** The amount that the application received in fees. App fees go into the API application's WePay account. */
-	private String appFee;
+	private BigDecimal appFee;
 	/** Who is paying the fee (either "payer" for the person paying or "payee" for the person receiving the money). */
 	private FeePayer feePayer;
 	/** The unique reference_id passed by the application (if available). */

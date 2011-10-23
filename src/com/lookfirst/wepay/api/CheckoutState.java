@@ -3,6 +3,8 @@ package com.lookfirst.wepay.api;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import com.lookfirst.wepay.api.Checkout.State;
+
 /**
  * https://stage.wepay.com/developer/reference/checkout
  *
@@ -14,5 +16,5 @@ import lombok.EqualsAndHashCode;
 public class CheckoutState extends CheckoutId {
 
 	/** The state the payment is in. See the IPN section for a list of payment states. */
-	private String state;
+	private State state;
 }

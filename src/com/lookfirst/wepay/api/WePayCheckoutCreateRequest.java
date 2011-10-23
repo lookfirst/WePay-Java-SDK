@@ -4,6 +4,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
+import com.lookfirst.wepay.api.WePayCheckoutDetails.FeePayer;
+
 /**
  * https://stage.wepay.com/developer/reference/checkout
  *
@@ -16,22 +18,15 @@ import lombok.ToString;
  * If you did not specify a redirect_uri, they will be returned to the application homepage.
  *
  * @author Jon Scott Stevens
+ * @author Jeff Schnitzer
  */
 @Data
 @ToString
 @EqualsAndHashCode(callSuper=false)
-public class WePayCheckoutCreate extends WePayRequest<WePayCheckoutCreateResponse> {
+public class WePayCheckoutCreateRequest extends WePayRequest<WePayCheckoutUri> {
 
-	public static final String MODE_IFRAME = "iframe";
-	public static final String MODE_REGULAR = "regular";
-
-	public static final String TYPE_GOODS = "GOODS";
-	public static final String TYPE_SERVICE = "SERVICE";
-	public static final String TYPE_DONATION = "DONATION";
-	public static final String TYPE_PERSONAL = "PERSONAL";
-
-	public static final String PAYER = "Payer";
-	public static final String PAYEE = "Payee";
+	public static enum Mode { iframe, regular }
+	public static enum Type { GOODS, SERVICE, DONATION, PERSONAL }
 
 	/** The unique ID of the account you want to create a checkout for. */
 	private String accountId;
@@ -42,7 +37,7 @@ public class WePayCheckoutCreate extends WePayRequest<WePayCheckoutCreateRespons
 	/** A short message that will be included in the payment confirmation email. */
 	private String emailMessage;
 	/** The the checkout type (one of the following: GOODS, SERVICE, DONATION, or PERSONAL) */
-	private String type;
+	private Type type;
 	/** The unique reference id of the checkout (set by the application in /checkout/create */
 	private String referenceId;
 	/** The amount that the payer will pay. */
@@ -50,7 +45,7 @@ public class WePayCheckoutCreate extends WePayRequest<WePayCheckoutCreateRespons
 	/** The amount that the application will receive in fees. App fees go into the API applications WePay account. */
 	private String appFee;
 	/** Who will pay the fees (WePay's fees and any app fees). Set to "Payer" to charge fees to the person paying (Payer will pay amount + fees, payee will receive amount). Set to "Payee" to charge fees to the person receiving money (Payer will pay amount, Payee will receive amount - fees). Defaults to "Payer". */
-	private String feePayer;
+	private FeePayer feePayer;
 	/** The uri the payer will be redirected to after paying. */
 	private String redirectUri;
 	/** The uri that will receive any Instant Payment Notifications sent. Needs to be a full uri (ex https://www.wepay.com ) */
@@ -64,14 +59,9 @@ public class WePayCheckoutCreate extends WePayRequest<WePayCheckoutCreateRespons
 	/** A boolean value (0 or 1). If set to 1 and the account has a relevant tax entry (see /account/set_tax), then tax will be charged. */
 	private boolean chargeTax;
 	/** What mode the checkout will be displayed in. The options are 'iframe' or 'regular'. Choose 'iframe' if this is an iframe checkout. Mode defaults to 'regular'. */
-	private String mode;
+	private Mode mode;
 	/** The ID of a preapproval object. If you include a valid preapproval_id the checkout will be executed immediately, and the payer will be charged without having to go to the checkout_uri. You should not have to send the payer to the checkout_uri.  */
 	private String preapprovalId;
-
-	/** */
-	public WePayCheckoutCreate() {
-		super(WePayCheckoutCreateResponse.class);
-	}
 
 	/** */
 	@Override

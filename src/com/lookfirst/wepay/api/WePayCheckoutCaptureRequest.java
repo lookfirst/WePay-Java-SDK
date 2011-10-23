@@ -11,18 +11,14 @@ import lombok.EqualsAndHashCode;
  * You can only make this call if the checkout is in state 'reserved'.
  *
  * @author Jon Scott Stevens
+ * @author Jeff Schnitzer
  */
 @Data
 @EqualsAndHashCode(callSuper=false)
-public class WePayCheckoutCapture extends WePayRequest<WePayCheckoutCaptureResponse> {
+public class WePayCheckoutCaptureRequest extends WePayRequest<WePayCheckoutState> {
 
 	/** Yes	The unique ID of the checkout to be captured. */
 	private String checkoutId;
-
-	/** */
-	public WePayCheckoutCapture() {
-		super(WePayCheckoutCaptureResponse.class);
-	}
 
 	/** */
 	@Override

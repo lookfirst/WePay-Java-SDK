@@ -10,19 +10,15 @@ import lombok.ToString;
  * This call lets you get the tax rates for an account. They will be in the same format as detailed in the /account/set_tax call.
  *
  * @author Jon Scott Stevens
+ * @author Jeff Schnitzer
  */
 @Data
 @ToString
 @EqualsAndHashCode(callSuper=false)
-public class WePayAccountGetTax extends WePayRequest<WePayAccountGetTaxResponse> {
+public class WePayAccountGetTaxRequest extends WePayRequest<WePayAccountTax> {
 
 	/** The unique ID of the account you want to look up. */
 	private String accountId;
-
-	/** */
-	public WePayAccountGetTax() {
-		super(WePayAccountGetTaxResponse.class);
-	}
 
 	/** */
 	@Override

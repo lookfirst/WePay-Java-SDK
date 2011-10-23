@@ -8,14 +8,13 @@ import lombok.ToString;
  * https://stage.wepay.com/developer/reference/checkout
  *
  * @author Jon Scott Stevens
+ * @author Jeff Schnitzer
  */
 @Data
+@EqualsAndHashCode(callSuper=true)
 @ToString
-@EqualsAndHashCode(callSuper=false)
-public class WePayCheckoutCancelResponse extends WePayResponse {
+public class WePayCheckoutState extends WePayCheckoutId {
 
-	/** The unique ID of the checkout that was successfully cancelled. */
-	private String checkoutId;
 	/** The state the payment is in. See the IPN section for a list of payment states. */
 	private String state;
 }

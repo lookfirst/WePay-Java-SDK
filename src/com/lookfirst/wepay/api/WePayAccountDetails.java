@@ -4,30 +4,24 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
+
 /**
  * https://stage.wepay.com/developer/reference/account
  *
- * This call allows you to lookup the details of the a payment account on WePay.
- * The payment account must belong to the user associated with the access token used to make the call.
- *
  * @author Jon Scott Stevens
+ * @author Jeff Schnitzer
  */
 @Data
 @ToString
 @EqualsAndHashCode(callSuper=false)
-public class WePayAccountDetails extends WePayRequest<WePayAccountDetailsResponse> {
+public class WePayAccountDetails extends WePayAccountUri {
 
-	/** The unique ID of the account you want to look up. */
-	private String accountId;
-
-	/** */
-	public WePayAccountDetails() {
-		super(WePayAccountDetailsResponse.class);
-	}
-
-	/** */
-	@Override
-	public String getEndpoint() {
-		return "/account";
-	}
+	/** The name of the account. */
+	private String name;
+	/** The account description. */
+	private String description;
+	/** The unique reference ID of the account (this is set by the application in the /account/create or /account/modify call). */
+	private String referenceId;
+	/** The maximum amount in dollars (including fees) that you can charge for payments to this account. */
+	private String paymentLimit;
 }

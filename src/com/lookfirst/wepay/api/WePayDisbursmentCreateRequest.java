@@ -14,11 +14,12 @@ import lombok.ToString;
  * send money from a WePay account to between 1 and 1000 emails, use this call.
  *
  * @author Jon Scott Stevens
+ * @author Jeff Schnitzer
  */
 @Data
 @ToString
 @EqualsAndHashCode(callSuper=false)
-public class WePayDisbursmentCreate extends WePayRequest<WePayDisbursementCreateResponse> {
+public class WePayDisbursmentCreateRequest extends WePayRequest<WePayDisbursementDetails> {
 
 	/** Yes	The unique ID of the account you want to look up disbursements for. */
 	private String accountId;
@@ -34,12 +35,7 @@ public class WePayDisbursmentCreate extends WePayRequest<WePayDisbursementCreate
 	 * amount: Dollar amount to send to the email.
 	 * reference_id: (optional) id to track the transfer.
 	 */
-	private List<WePayTransfer> transfers;
-
-	/** */
-	public WePayDisbursmentCreate() {
-		super(WePayDisbursementCreateResponse.class);
-	}
+	private List<WePayTransferRequest> transfers;
 
 	/** */
 	@Override

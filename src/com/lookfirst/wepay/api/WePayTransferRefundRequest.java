@@ -10,14 +10,19 @@ import lombok.ToString;
  * This call allows you to refund a transfer.
  *
  * @author Jon Scott Stevens
+ * @author Jeff Schnitzer
  */
 @Data
 @ToString
 @EqualsAndHashCode(callSuper=false)
-public class WePayTransferRefundResponse extends WePayResponse {
+public class WePayTransferRefundRequest extends WePayRequest<WePayTransferState> {
 
-	/** Yes	The unique ID of the transfer you refunded. */
+	/** Yes	The unique ID of the transfer you want to refund. */
 	private String transferId;
-	/** The state that the refund is in (new, sent, or failed). */
-	public String state;
+
+	/** */
+	@Override
+	public String getEndpoint() {
+		return "/transfer/refund";
+	}
 }

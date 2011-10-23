@@ -10,11 +10,12 @@ import lombok.ToString;
  * Updates the specified properties. If reference_id is passed it MUST be unique for the user/application pair.
  *
  * @author Jon Scott Stevens
+ * @author Jeff Schnitzer
  */
 @Data
 @ToString
 @EqualsAndHashCode(callSuper=false)
-public class WePayAccountModify extends WePayRequest<WePayAccountModifyResponse> {
+public class WePayAccountModifyRequest extends WePayRequest<WePayAccountUri> {
 
 	/** The unique ID of the account you want to modify. */
 	private String accountId;
@@ -26,11 +27,6 @@ public class WePayAccountModify extends WePayRequest<WePayAccountModifyResponse>
 	private String referenceId;
 	/** The uri for an image that you want to use for the accounts icon. This image will be used in the co-branded checkout process. */
 	private String imageUri;
-
-	/** */
-	public WePayAccountModify() {
-		super(WePayAccountModifyResponse.class);
-	}
 
 	/** */
 	@Override

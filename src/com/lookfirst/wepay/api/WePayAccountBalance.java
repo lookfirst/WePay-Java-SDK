@@ -1,32 +1,22 @@
 package com.lookfirst.wepay.api;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 /**
  * https://stage.wepay.com/developer/reference/account
  *
- * Gets the balance for the account.
- *
  * @author Jon Scott Stevens
+ * @author Jeff Schnitzer
  */
 @Data
 @ToString
-@EqualsAndHashCode(callSuper=false)
-public class WePayAccountBalance extends WePayRequest<WePayAccountBalanceResponse> {
+public class WePayAccountBalance {
 
-	/** The name of the account you want the balance for. */
-	private String accountId;
-
-	/** */
-	public WePayAccountBalance() {
-		super(WePayAccountBalanceResponse.class);
-	}
-
-	/** */
-	@Override
-	public String getEndpoint() {
-		return "/account/balance";
-	}
+	/** The pending balance of the account. */
+	private String pendingBalance;
+	/** The actual amount of money that has cleared and is available to the account. */
+	private String availableBalance;
+	/** The currency of the above amounts. For now this will always be USD. */
+	private String currency;
 }

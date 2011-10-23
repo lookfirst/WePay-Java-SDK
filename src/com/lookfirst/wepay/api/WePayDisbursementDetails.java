@@ -13,11 +13,12 @@ import lombok.ToString;
  * of monetary transfers from a WePay account to an email address.
  *
  * @author Jon Scott Stevens
+ * @author Jeff Schnitzer
  */
 @Data
 @ToString
 @EqualsAndHashCode(callSuper=false)
-public class WePayDisbursementDetailsResponse extends WePayResponse {
+public class WePayDisbursementDetails {
 
 	/** The unique ID of the disbursement. */
 	private String disbursementId;

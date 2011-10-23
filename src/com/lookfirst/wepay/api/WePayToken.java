@@ -1,40 +1,26 @@
 package com.lookfirst.wepay.api;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-
+import lombok.ToString;
 
 /**
  * Once you have sent the user through the authorization end point and they have returned with a code,
- * you can use that code to retrieve and access token for that user. The redirect uri and state
- * (if passed) will need to be the same as in the in /v2/oauth2/authorize step
+ * you can use that code to retrieve and access token for that user. The redirect uri will need to be
+ * the same as in the in /v2/oauth2/authorize step
  *
  * @author Jon Scott Stevens
+ * @author Jeff Schnitzer
  */
 @Data
-@EqualsAndHashCode(callSuper=false)
-public class WePayToken extends WePayRequest<WePayTokenResponse> {
+@ToString
+public class WePayToken  {
 
-	public static final String ENDPOINT = "/oauth2/token";
-
-	/** Yes	The client ID issued to the app by WePay - see your client ID on your app screen */
-	private String clientId;
-	/** Yes	The uri the user will be redirected to after authorization. Must be the same as passed in /v2/oauth2/authorize */
-	private String redirectUri;
-	/** Yes	The client secret issued to the app by WePay - see your client secret on your app screen */
-	private String clientSecret;
-	/** Yes	The code returned by /v2/oauth2/authorize */
-	private String code;
-
-	/** */
-	public WePayToken() {
-		super(WePayTokenResponse.class);
-	}
-
-	/** */
-	@Override
-	public String getEndpoint() {
-		return "/oauth2/token";
-	}
-
+	/** The unique user ID of the user */
+	private String userId;
+	/** The access token that you can use to make calls on behalf of the user */
+	private String accessToken;
+	/** The token type - for now only "BEARER" is supported */
+	private String tokenType;
+	/** How much time till the access_token expires. If NULL or not present, the access token will be valid until the user revokes the access_token */
+	private String expiresIn;
 }

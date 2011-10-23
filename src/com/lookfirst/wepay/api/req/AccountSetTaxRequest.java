@@ -1,7 +1,9 @@
-package com.lookfirst.wepay.api;
+package com.lookfirst.wepay.api.req;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
+import com.lookfirst.wepay.api.AccountTax;
 
 /**
  * https://stage.wepay.com/developer/reference/account
@@ -14,7 +16,7 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper=false)
-public class AccountSetTax extends WePayRequest<AccountTax> {
+public class AccountSetTaxRequest extends WePayRequest<AccountTax> {
 
 	/** The unique ID of the account you want to look up. */
 	private String accountId;

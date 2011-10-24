@@ -20,10 +20,10 @@ First, become familiar with how their API works (see link above). Then, this is 
     String url = api.getAuthorizationUri(Scope.getAll(), authRedirectUrl, myState);
 
     // Use the code to generate a token.
-    WePayTokenResponse token = api.getToken(code, authRedirectUrl);
+    Token token = api.getToken(code, authRedirectUrl);
 
     // Getting details about a user using an AccessToken
-    WePayUserResponse resp = api.execute(wePayAccount.getAccessToken(), new WePayUserDetails());
+    WePayUser user = api.execute(token.getAccessToken(), new UserRequest());
 
 
 Frequently Asked Questions
@@ -59,4 +59,4 @@ A: /preapproval, /withdrawl
 
 Q: What are the dependencies?
 
-A: Jackson, Commons-Lang3, Slf4j. All of the jar files are in the lib directory. I also use Lombok to save me a lot of typing. You don't need lombok to use the API. If you import the project into Eclipse, you will need to also install Lombok. Just double click the lombok.jar and restart Eclipse.
+A: Jackson, Commons-IO, Commons-Lang3, Slf4j. All of the jar files are in the lib directory. I also use Lombok to save me a lot of typing. You don't need lombok to use the API. If you import the project into Eclipse, you will need to also install Lombok. Just double click the lombok.jar and restart Eclipse.

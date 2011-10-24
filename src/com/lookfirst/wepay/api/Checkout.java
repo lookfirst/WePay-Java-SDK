@@ -17,18 +17,27 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper=false)
 public class Checkout extends CheckoutUri {
 
+	/**
+	 * Note that the toString() impls fix jackson serialization problems
+	 */
 	public static enum State {
-		New,
-		Authorized,
-		Started,
-		Reserved,
-		Captured,
-		Settled,
-		Cancelled,
-		Refunded,
-		Charged_back,
-		Failed,
-		Expired
+		new_ {
+			@Override
+			public String toString() { return "new"; }
+		},
+		authorized,
+		started,
+		reserved,
+		captured,
+		settled,
+		cancelled,
+		refunded,
+		charged_back {
+			@Override
+			public String toString() { return "charged back"; }
+		},
+		failed,
+		expired
 	}
 	
 	public static enum FeePayer { payer, payee }

@@ -12,20 +12,22 @@ import java.util.Arrays;
 import java.util.List;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.codehaus.jackson.JsonNode;
+import org.codehaus.jackson.map.DeserializationConfig;
+import org.codehaus.jackson.map.DeserializationConfig.Feature;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.PropertyNamingStrategy;
 import org.codehaus.jackson.map.SerializationConfig;
-import org.codehaus.jackson.map.DeserializationConfig.Feature;
 import org.codehaus.jackson.type.JavaType;
 
-import com.lookfirst.wepay.api.WePayException;
 import com.lookfirst.wepay.api.Token;
+import com.lookfirst.wepay.api.WePayException;
 import com.lookfirst.wepay.api.req.TokenRequest;
 import com.lookfirst.wepay.api.req.WePayRequest;
 
@@ -38,6 +40,7 @@ import com.lookfirst.wepay.api.req.WePayRequest;
  * @author Jeff Schnitzer
  */
 @Slf4j
+@NoArgsConstructor
 public class WePayApi {
 
 	/**
@@ -52,6 +55,7 @@ public class WePayApi {
 		SCOPE_VIEW_USER       ("view_user");         // Get details about authenticated user
 
 		private String scope;
+		
 		private Scope(String scope) {
 			this.scope = scope;
 		}
@@ -71,31 +75,36 @@ public class WePayApi {
 
 	}
 
-	private static final String STAGING_URL = "https://stage.wepay.com/v2";
-	private static final String PROD_URL = "https://wepay.com/v2";
-	private String CURRENT_URL;
-
-	@Getter @Setter
-	private WePayKey key;
-
-	private static final ObjectMapper mapper = new ObjectMapper();
-
+	/** */
+	private static final ObjectMapper MAPPER = new ObjectMapper();
 	static {
 		// For the UserDetails bean (an others), we send an empty bean.
-		mapper.disable(SerializationConfig.Feature.FAIL_ON_EMPTY_BEANS);
+		MAPPER.disable(SerializationConfig.Feature.FAIL_ON_EMPTY_BEANS);
 		// Makes for nice java property/method names
-		mapper.setPropertyNamingStrategy(PropertyNamingStrategy.CAMEL_CASE_TO_LOWER_CASE_WITH_UNDERSCORES);
+		MAPPER.setPropertyNamingStrategy(PropertyNamingStrategy.CAMEL_CASE_TO_LOWER_CASE_WITH_UNDERSCORES);
 		// If wepay adds properties, we shouldn't blow up
-		mapper.configure(Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		MAPPER.configure(Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		
+		// This saves us the mess of enums that conflict with java keywords (eg Checkout.State.new_)
+		MAPPER.configure(SerializationConfig.Feature.WRITE_ENUMS_USING_TO_STRING, true);
+		MAPPER.configure(DeserializationConfig.Feature.READ_ENUMS_USING_TO_STRING, true);
 	}
 
 	/** */
-	private WePayApi() {}
+	private static final String STAGING_URL = "https://stage.wepay.com/v2";
+	private static final String PROD_URL = "https://wepay.com/v2";
 
+	/** */
+	private String currentUrl;
+
+	/** */
+	@Getter @Setter
+	private WePayKey key;
+
+	/** */
 	public WePayApi(WePayKey key) {
-		this();
 		this.key = key;
-		this.CURRENT_URL = key.isProduction() ? PROD_URL : STAGING_URL;
+		this.currentUrl = key.isProduction() ? PROD_URL : STAGING_URL;
 	}
 
 	/**
@@ -161,12 +170,12 @@ public class WePayApi {
 	 */
 	public <T> T execute(String token, WePayRequest<T> req) throws WePayException {
 
-		String uri = CURRENT_URL + req.getEndpoint();
+		String uri = currentUrl + req.getEndpoint();
 
 		JsonNode resp = null;
 
 		try {
-			String post = mapper.writeValueAsString(req);
+			String post = MAPPER.writeValueAsString(req);
 
 			if (log.isTraceEnabled()) {
 				log.trace("request to {}:  {}", uri, post);
@@ -178,9 +187,9 @@ public class WePayApi {
 			if (log.isTraceEnabled()) {
 				String results = IOUtils.toString(is);
 				log.trace("response: " + results);
-				resp = mapper.readTree(results);
+				resp = MAPPER.readTree(results);
 			} else {
-				resp = mapper.readTree(is);
+				resp = MAPPER.readTree(is);
 			}
 
 			// if there is an error in the response from wepay, it'll get thrown in this call.
@@ -191,9 +200,9 @@ public class WePayApi {
 			// generic type information, and we can use this to determine what type to deserialize.  The
 			// trickiest case is WePayAccountFindRequest, whose response type is List<AccountWithUri>.
 			ParameterizedType paramType = (ParameterizedType)req.getClass().getGenericSuperclass();
-			JavaType type = mapper.constructType(paramType.getActualTypeArguments()[0]);
+			JavaType type = MAPPER.constructType(paramType.getActualTypeArguments()[0]);
 
-			return mapper.readValue(resp, type);
+			return MAPPER.readValue(resp, type);
 
 		} catch (IOException e) {
 			throw new WePayException(e.getMessage(), e);
@@ -245,10 +254,8 @@ public class WePayApi {
 	 */
 	private String urlEncode(Object value)
 	{
-		try
-		{
+		try {
 			return URLEncoder.encode(value.toString(), "utf-8");
-		}
-		catch (UnsupportedEncodingException e) { throw new RuntimeException(e); }
+		} catch (UnsupportedEncodingException e) { throw new RuntimeException(e); }
 	}
 }

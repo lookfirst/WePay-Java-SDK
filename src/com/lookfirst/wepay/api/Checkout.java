@@ -31,7 +31,7 @@ public class Checkout extends CheckoutUri {
 		Expired
 	}
 	
-	public static enum FeePayer { Payer, Payee }
+	public static enum FeePayer { payer, payee }
 
 	/** The unique ID of the payment account that the money will go into. */
 	private Long accountId;

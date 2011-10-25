@@ -41,6 +41,7 @@ import com.lookfirst.wepay.api.req.WePayRequest;
  */
 @Slf4j
 @NoArgsConstructor
+@SuppressWarnings("deprecation")
 public class WePayApi {
 
 	/**
@@ -84,6 +85,8 @@ public class WePayApi {
 		MAPPER.setPropertyNamingStrategy(PropertyNamingStrategy.CAMEL_CASE_TO_LOWER_CASE_WITH_UNDERSCORES);
 		// If wepay adds properties, we shouldn't blow up
 		MAPPER.configure(Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		// I cann't figure out what the nondeprecated solution to this is
+		MAPPER.configure(SerializationConfig.Feature.WRITE_NULL_PROPERTIES, false);
 		
 		// This saves us the mess of enums that conflict with java keywords (eg Checkout.State.new_)
 		MAPPER.configure(SerializationConfig.Feature.WRITE_ENUMS_USING_TO_STRING, true);
@@ -235,14 +238,14 @@ public class WePayApi {
 		if (postJson != null) {
 			conn.setDoOutput(true); // Triggers POST.
 		}
-		conn.setRequestProperty("Content-Type", "application/json");
+		conn.setRequestProperty("Content-Type", "application/json; charset=utf-8");
 
 		if (token != null) {
 			conn.setRequestProperty("Authorization", "Bearer " + token);
 		}
 
 		if (postJson != null) {
-			OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
+			OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream(), "UTF-8");
 			writer.write(postJson);
 			writer.close();
 		}

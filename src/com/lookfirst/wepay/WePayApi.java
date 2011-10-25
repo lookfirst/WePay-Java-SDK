@@ -77,7 +77,7 @@ public class WePayApi {
 	}
 
 	/** */
-	private static final ObjectMapper MAPPER = new ObjectMapper();
+	public static final ObjectMapper MAPPER = new ObjectMapper();
 	static {
 		// For the UserDetails bean (an others), we send an empty bean.
 		MAPPER.disable(SerializationConfig.Feature.FAIL_ON_EMPTY_BEANS);

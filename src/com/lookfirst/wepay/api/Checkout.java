@@ -39,7 +39,7 @@ public class Checkout extends CheckoutUri {
 		failed,
 		expired
 	}
-	
+
 	public static enum FeePayer { payer, payee }
 
 	/** The unique ID of the payment account that the money will go into. */
@@ -48,8 +48,22 @@ public class Checkout extends CheckoutUri {
 	private State state;
 	/** The short description of the checkout. */
 	private String shortDescription;
+	public void setShortDescription(String shortDescription) {
+		if (shortDescription != null && shortDescription.length() >= 127) {
+			throw new IllegalArgumentException("Max short description length is 127.");
+		}
+
+		this.shortDescription = shortDescription;
+	}
 	/** The long description of the checkout (if available). */
 	private String longDescription;
+	public void setLongDescription(String longDescription) {
+		if (longDescription != null && longDescription.length() >= 2047) {
+			throw new IllegalArgumentException("Max long description length is 2047.");
+		}
+
+		this.longDescription = longDescription;
+	}
 	/** The currency used (always USD for now). */
 	private String currency;
 	/** The dollar amount of the checkout object. This will always be the amount you passed in /checkout/create */

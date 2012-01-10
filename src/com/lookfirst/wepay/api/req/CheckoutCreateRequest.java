@@ -29,6 +29,17 @@ public class CheckoutCreateRequest extends WePayRequest<CheckoutUri> {
 	public static enum Mode { iframe, regular }
 	public static enum Type { GOODS, SERVICE, DONATION, PERSONAL }
 
+	@Data
+	public class PrefillInfo {
+		String name;
+		String email;
+		String phoneNumber;
+		String address;
+		String city;
+		String state;
+		String zip;
+	}
+
 	/** The unique ID of the account you want to create a checkout for. */
 	private Long accountId;
 	/** A short description of what is being paid for. */
@@ -37,7 +48,7 @@ public class CheckoutCreateRequest extends WePayRequest<CheckoutUri> {
 	private String longDescription;
 	/** A short message that will be included in the payment confirmation email. */
 	private String emailMessage;
-	/** The the checkout type (one of the following: GOODS, SERVICE, DONATION, or PERSONAL) */
+	/** Required. The the checkout type (one of the following: GOODS, SERVICE, DONATION, or PERSONAL) */
 	private Type type;
 	/** The unique reference id of the checkout (set by the application in /checkout/create */
 	private String referenceId;
@@ -63,6 +74,8 @@ public class CheckoutCreateRequest extends WePayRequest<CheckoutUri> {
 	private Mode mode;
 	/** The ID of a preapproval object. If you include a valid preapproval_id the checkout will be executed immediately, and the payer will be charged without having to go to the checkout_uri. You should not have to send the payer to the checkout_uri.  */
 	private String preapprovalId;
+	/** A JSON object that lets you pre fill certain fields in the checkout. Allowed fields are 'name', 'email', 'phone_number', 'address', 'city', 'state', 'zip', Pass the prefill-info as a JSON object like so: {"name":"Bill Clerico","phone_number":"855-469-3729"} */
+	private PrefillInfo prefillInfo;
 
 	/** */
 	@Override

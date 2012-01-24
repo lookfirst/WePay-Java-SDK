@@ -1,5 +1,6 @@
 package com.lookfirst.wepay.api;
 
+import java.io.Serializable;
 import java.util.List;
 
 import lombok.Data;
@@ -16,7 +17,8 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper=false)
-public class Disbursement {
+public class Disbursement implements Serializable {
+	private static final long serialVersionUID = 1L;
 
 	/** The unique ID of the disbursement. */
 	private String disbursementId;

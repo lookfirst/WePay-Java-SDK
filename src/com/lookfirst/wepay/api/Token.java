@@ -1,5 +1,7 @@
 package com.lookfirst.wepay.api;
 
+import java.io.Serializable;
+
 import lombok.Data;
 
 /**
@@ -11,7 +13,8 @@ import lombok.Data;
  * @author Jeff Schnitzer
  */
 @Data
-public class Token  {
+public class Token implements Serializable {
+	private static final long serialVersionUID = 1L;
 
 	/** The unique user ID of the user */
 	private String userId;

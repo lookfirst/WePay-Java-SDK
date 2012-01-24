@@ -1,5 +1,7 @@
 package com.lookfirst.wepay.api;
 
+import java.io.Serializable;
+
 import lombok.Data;
 
 /**
@@ -9,7 +11,8 @@ import lombok.Data;
  * @author Jeff Schnitzer
  */
 @Data
-public class AccountTax {
+public class AccountTax implements Serializable {
+	private static final long serialVersionUID = 1L;
 
 	/** The tax tables for the account. */
 	private String taxes;

@@ -16,6 +16,7 @@ import lombok.NoArgsConstructor;
 @Data
 @EqualsAndHashCode(callSuper=false)
 public class Checkout extends CheckoutUri {
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Note that the toString() impls fix jackson serialization problems

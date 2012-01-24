@@ -14,6 +14,7 @@ import com.lookfirst.wepay.api.Checkout.State;
 @Data
 @EqualsAndHashCode(callSuper=true)
 public class CheckoutState extends CheckoutId {
+	private static final long serialVersionUID = 1L;
 
 	/** The state the payment is in. See the IPN section for a list of payment states. */
 	private State state;

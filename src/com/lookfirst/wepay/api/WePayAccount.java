@@ -13,6 +13,7 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper=false)
 public class WePayAccount extends AccountUri {
+	private static final long serialVersionUID = 1L;
 
 	/** The name of the account. */
 	private String name;

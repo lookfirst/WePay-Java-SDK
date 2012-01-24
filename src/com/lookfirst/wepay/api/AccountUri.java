@@ -12,6 +12,7 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper=true)
 public class AccountUri extends AccountId {
+	private static final long serialVersionUID = 1L;
 
 	/** A uri that corresponds to the account's page on WePay. */
 	private String accountUri;

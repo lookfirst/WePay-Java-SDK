@@ -12,6 +12,7 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper=false)
 public class CheckoutUri extends CheckoutId {
+	private static final long serialVersionUID = 1L;
 
 	/** The uri you can send a user to so they can pay. */
 	private String checkoutUri;

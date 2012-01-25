@@ -27,7 +27,6 @@ public class Checkout extends CheckoutUri {
 			public String toString() { return "new"; }
 		},
 		authorized,
-		started,
 		reserved,
 		captured,
 		settled,

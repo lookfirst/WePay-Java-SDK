@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="lib/commons-lang3-3.0.2-SNAPSHOT.jar"/>
-	<classpathentry kind="lib" path="lib/jackson-core-asl-1.9.0.jar"/>
-	<classpathentry kind="lib" path="lib/jackson-mapper-asl-1.9.0.jar"/>
-	<classpathentry kind="lib" path="lib/lombok.jar"/>
-	<classpathentry kind="lib" path="lib/slf4j-api-1.6.3.jar"/>
-	<classpathentry kind="lib" path="lib/slf4j-jdk14-1.6.3.jar"/>
 	<classpathentry kind="lib" path="lib/commons-io-2.1.jar"/>
+	<classpathentry kind="lib" path="lib/jackson-core-asl-1.9.4.jar"/>
+	<classpathentry kind="lib" path="lib/jackson-mapper-asl-1.9.4.jar"/>
+	<classpathentry kind="lib" path="lib/commons-lang3-3.1.jar"/>
+	<classpathentry kind="lib" path="lib/slf4j-api-1.6.4.jar"/>
+	<classpathentry kind="lib" path="lib/slf4j-jdk14-1.6.4.jar"/>
+	<classpathentry kind="lib" path="lib/lombok.jar"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="output" path="_eclipse"/>
 </classpath>

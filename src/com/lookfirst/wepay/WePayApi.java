@@ -47,16 +47,20 @@ public class WePayApi {
 	/**
 	 * Scope fields
 	 * Passed into Wepay::getAuthorizationUri as array
+	 *
+	 * https://stage.wepay.com/developer/reference/permissions
 	 */
 	public enum Scope {
-		SCOPE_MANAGE_ACCOUNTS ("manage_accounts"),   // Open and interact with accounts
-		SCOPE_VIEW_BALANCE    ("view_balance"),      // View account balances
-		SCOPE_COLLECT_PAYMENTS("collect_payments"),  // Create and interact with checkouts
-		SCOPE_REFUND_PAYMENTS ("refund_payments"),   // Refund checkouts
-		SCOPE_VIEW_USER       ("view_user");         // Get details about authenticated user
+		SCOPE_MANAGE_ACCOUNTS		("manage_accounts"),	// Open and interact with accounts
+		SCOPE_VIEW_BALANCE			("view_balance"),		// View account balances
+		SCOPE_COLLECT_PAYMENTS		("collect_payments"),	// Create and interact with checkouts
+		SCOPE_REFUND_PAYMENTS		("refund_payments"),	// Refund checkouts
+		SCOPE_VIEW_USER				("view_user"),			// Get details about authenticated user
+		SCOPE_PREAPPROVE_PAYMENTS	("preapprove_payments"),// preapproval
+		SCOPE_SEND_MONEY			("send_money");			// /disbursement & /transfer
 
 		private String scope;
-		
+
 		private Scope(String scope) {
 			this.scope = scope;
 		}
@@ -73,7 +77,6 @@ public class WePayApi {
 		public String toString() {
 			return this.scope;
 		}
-
 	}
 
 	/** */
@@ -87,7 +90,7 @@ public class WePayApi {
 		MAPPER.configure(Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 		// I cann't figure out what the nondeprecated solution to this is
 		MAPPER.configure(SerializationConfig.Feature.WRITE_NULL_PROPERTIES, false);
-		
+
 		// This saves us the mess of enums that conflict with java keywords (eg Checkout.State.new_)
 		MAPPER.configure(SerializationConfig.Feature.WRITE_ENUMS_USING_TO_STRING, true);
 		MAPPER.configure(DeserializationConfig.Feature.READ_ENUMS_USING_TO_STRING, true);

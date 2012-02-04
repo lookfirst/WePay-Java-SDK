@@ -1,9 +1,11 @@
 package com.lookfirst.wepay.api.req;
 
-import com.lookfirst.wepay.api.CheckoutState;
+import java.math.BigDecimal;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
+import com.lookfirst.wepay.api.CheckoutState;
 
 /**
  * https://stage.wepay.com/developer/reference/checkout
@@ -21,6 +23,10 @@ public class CheckoutRefundRequest extends WePayRequest<CheckoutState> {
 	private Long checkoutId;
 	/** Yes	The reason the payment is being refunded. */
 	private String refundReason;
+	/** Optionally specified partial refund amount */
+	private BigDecimal amount;
+	/** Optional unique reference id, which allows partial refunds to be idempotent */
+	String referenceId;
 
 	/** */
 	@Override

@@ -158,7 +158,7 @@ public class WePayApi {
 	 * @param redirectUrl  Where user went after logging in at WePay (must match value from getAuthorizationUri)
 	 * @return json {"user_id":"123456","access_token":"1337h4x0rzabcd12345","token_type":"BEARER"}
 	 */
-	public Token getToken(String code, String redirectUrl) throws WePayException {
+	public Token getToken(String code, String redirectUrl) throws IOException, WePayException {
 
 		TokenRequest request = new TokenRequest();
 		request.setClientId(key.getClientId());
@@ -173,45 +173,40 @@ public class WePayApi {
 	 * Make API calls against authenticated user.
 	 * Turn up logging to trace level to see the request / response.
 	 */
-	public <T> T execute(String token, WePayRequest<T> req) throws WePayException {
+	public <T> T execute(String token, WePayRequest<T> req) throws IOException, WePayException {
 
 		String uri = currentUrl + req.getEndpoint();
 
 		JsonNode resp = null;
 
-		try {
-			String post = MAPPER.writeValueAsString(req);
+		String post = MAPPER.writeValueAsString(req);
 
-			if (log.isTraceEnabled()) {
-				log.trace("request to {}:  {}", uri, post);
-			}
-
-			HttpURLConnection conn = getConnection(uri, post, token);
-			InputStream is = conn.getInputStream();
-
-			if (log.isTraceEnabled()) {
-				String results = IOUtils.toString(is);
-				log.trace("response: " + results);
-				resp = MAPPER.readTree(results);
-			} else {
-				resp = MAPPER.readTree(is);
-			}
-
-			// if there is an error in the response from wepay, it'll get thrown in this call.
-			this.checkForError(resp);
-
-			// This is a little bit of black magic with jackson.  We know that any request passed extends
-			// the abstract WePayRequest and de-genericizes it.  This means the concrete class has full
-			// generic type information, and we can use this to determine what type to deserialize.  The
-			// trickiest case is WePayAccountFindRequest, whose response type is List<AccountWithUri>.
-			ParameterizedType paramType = (ParameterizedType)req.getClass().getGenericSuperclass();
-			JavaType type = MAPPER.constructType(paramType.getActualTypeArguments()[0]);
-
-			return MAPPER.readValue(resp, type);
-
-		} catch (IOException e) {
-			throw new WePayException(e.getMessage(), e);
+		if (log.isTraceEnabled()) {
+			log.trace("request to {}:  {}", uri, post);
 		}
+
+		HttpURLConnection conn = getConnection(uri, post, token);
+		InputStream is = conn.getInputStream();
+
+		if (log.isTraceEnabled()) {
+			String results = IOUtils.toString(is);
+			log.trace("response: " + results);
+			resp = MAPPER.readTree(results);
+		} else {
+			resp = MAPPER.readTree(is);
+		}
+
+		// if there is an error in the response from wepay, it'll get thrown in this call.
+		this.checkForError(resp);
+
+		// This is a little bit of black magic with jackson.  We know that any request passed extends
+		// the abstract WePayRequest and de-genericizes it.  This means the concrete class has full
+		// generic type information, and we can use this to determine what type to deserialize.  The
+		// trickiest case is WePayAccountFindRequest, whose response type is List<AccountWithUri>.
+		ParameterizedType paramType = (ParameterizedType)req.getClass().getGenericSuperclass();
+		JavaType type = MAPPER.constructType(paramType.getActualTypeArguments()[0]);
+
+		return MAPPER.readValue(resp, type);
 	}
 
 	/**

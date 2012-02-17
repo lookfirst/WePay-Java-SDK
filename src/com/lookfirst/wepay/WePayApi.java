@@ -101,11 +101,19 @@ public class WePayApi {
 
 	/** */
 	private String currentUrl;
-
+	
 	/** */
 	@Getter @Setter
 	private WePayKey key;
 
+	/** Timeout in milliseconds */
+	@Getter @Setter
+	int timeout;
+	
+	/** Number of retries if the connection fails */
+	@Getter @Setter
+	int retries;
+	
 	/** */
 	public WePayApi(WePayKey key) {
 		this.key = key;
@@ -221,14 +229,36 @@ public class WePayApi {
 	}
 
 	/**
-	 * Common functionality for posting data.
+	 * Common functionality for posting data.  Smart about retries.
 	 *
 	 * WePay's API is not strictly RESTful, so all requests are sent as POST unless there are no request values
 	 */
 	private HttpURLConnection getConnection(String uri, String postJson, String token) throws IOException {
+		int tries = 0;
+		IOException last = null;
+		
+		while (tries++ <= retries) {
+			try {
+				return getConnectionOnce(uri, postJson, token);
+			} catch (IOException ex) {
+				last = ex;
+			}
+		}
+		
+		throw last;
+	}
+	
+	/**
+	 */
+	private HttpURLConnection getConnectionOnce(String uri, String postJson, String token) throws IOException {
 
 		URL url = new URL(uri);
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+		
+		if (timeout > 0) {
+			conn.setReadTimeout(timeout);
+			conn.setConnectTimeout(timeout);
+		}
 
 		if (postJson != null && postJson.equals("{}"))
 			postJson = null;
@@ -247,6 +277,7 @@ public class WePayApi {
 			writer.write(postJson);
 			writer.close();
 		}
+		
 		return conn;
 	}
 

@@ -39,7 +39,7 @@ A: Clone the project and then type: 'ant jar'
 
 Q: Why isn't this in a Maven repo? Will you add a pom file?
 
-A: Maven is a steaming pile of dog shit. This API should never be included in any public repo. I won't ever support Maven here.
+A: Maven is a steaming pile of dog :poop: . This API should never be included in any public repo. I won't ever support Maven here.
 
 Q: Is this an official API from WePay?
 

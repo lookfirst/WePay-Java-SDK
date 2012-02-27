@@ -18,11 +18,16 @@ public class WePayException extends RuntimeException {
 	@Getter
 	WePayError errorType;
 	
+	/** The error text by itself */
+	@Getter
+	String errorText;
+	
 	/** */
-	public WePayException(String error, String errorDescription) {
-		super(error + ": " + errorDescription);
+	public WePayException(String error, String errorText) {
+		super(error + ": " + errorText);
 		
 		this.error = error;
+		this.errorText = errorText;
 		
 		// If wepay adds a new error, we won't have it registered
 		try {

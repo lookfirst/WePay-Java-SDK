@@ -30,7 +30,7 @@ public class CheckoutCreateRequest extends WePayRequest<CheckoutUri> {
 	public static enum Type { GOODS, SERVICE, DONATION, PERSONAL }
 
 	@Data
-	public class PrefillInfo {
+	public static class PrefillInfo {
 		String name;
 		String email;
 		String phoneNumber;

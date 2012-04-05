@@ -46,8 +46,18 @@ public class CheckoutCreateRequest extends WePayRequest<CheckoutUri> {
 	private String shortDescription;
 	/** A long description of what is being paid for. */
 	private String longDescription;
-	/** A short message that will be included in the payment confirmation email. */
+
+	/**
+	 * A short message that will be included in the payment confirmation email.
+	 * @deprecated Use payerEmailMessage
+	 */
 	private String emailMessage;
+
+	/** A short message that will be included in the payment confirmation email to the payer. */
+	private String payerEmailMessage;
+	/** A short message that will be included in the payment confirmation email to the payee. */
+	private String payeeEmailMessage;
+
 	/** Required. The the checkout type (one of the following: GOODS, SERVICE, DONATION, or PERSONAL) */
 	private Type type;
 	/** The unique reference id of the checkout (set by the application in /checkout/create */

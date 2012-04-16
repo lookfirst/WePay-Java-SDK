@@ -18,14 +18,14 @@ import lombok.extern.slf4j.Slf4j;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.codehaus.jackson.JsonNode;
-import org.codehaus.jackson.map.DeserializationConfig;
-import org.codehaus.jackson.map.DeserializationConfig.Feature;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.map.PropertyNamingStrategy;
-import org.codehaus.jackson.map.SerializationConfig;
-import org.codehaus.jackson.type.JavaType;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.JavaType;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.lookfirst.wepay.api.Token;
 import com.lookfirst.wepay.api.req.TokenRequest;
 import com.lookfirst.wepay.api.req.WePayRequest;
@@ -40,7 +40,6 @@ import com.lookfirst.wepay.api.req.WePayRequest;
  */
 @Slf4j
 @NoArgsConstructor
-@SuppressWarnings("deprecation")
 public class WePayApi {
 
 	/**
@@ -82,17 +81,17 @@ public class WePayApi {
 	public static final ObjectMapper MAPPER = new ObjectMapper();
 	static {
 		// For the UserDetails bean (an others), we send an empty bean.
-		MAPPER.disable(SerializationConfig.Feature.FAIL_ON_EMPTY_BEANS);
+		MAPPER.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
 		// Makes for nice java property/method names
 		MAPPER.setPropertyNamingStrategy(PropertyNamingStrategy.CAMEL_CASE_TO_LOWER_CASE_WITH_UNDERSCORES);
 		// If wepay adds properties, we shouldn't blow up
-		MAPPER.configure(Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-		// I cann't figure out what the nondeprecated solution to this is
-		MAPPER.configure(SerializationConfig.Feature.WRITE_NULL_PROPERTIES, false);
+		MAPPER.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+		// Don't send null properties to wepay
+		MAPPER.setSerializationInclusion(JsonInclude.Include.NON_NULL);
 
 		// This saves us the mess of enums that conflict with java keywords (eg Checkout.State.new_)
-		MAPPER.configure(SerializationConfig.Feature.WRITE_ENUMS_USING_TO_STRING, true);
-		MAPPER.configure(DeserializationConfig.Feature.READ_ENUMS_USING_TO_STRING, true);
+		MAPPER.enable(SerializationFeature.WRITE_ENUMS_USING_TO_STRING);
+		MAPPER.enable(DeserializationFeature.READ_ENUMS_USING_TO_STRING);
 	}
 
 	/** */
@@ -214,7 +213,7 @@ public class WePayApi {
 		ParameterizedType paramType = (ParameterizedType)req.getClass().getGenericSuperclass();
 		JavaType type = MAPPER.constructType(paramType.getActualTypeArguments()[0]);
 
-		return MAPPER.readValue(resp, type);
+		return MAPPER.readValue(MAPPER.treeAsTokens(resp), type);
 	}
 
 	/**

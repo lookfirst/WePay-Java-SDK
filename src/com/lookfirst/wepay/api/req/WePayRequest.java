@@ -1,6 +1,6 @@
 package com.lookfirst.wepay.api.req;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * Interface for a WePayRequest object.

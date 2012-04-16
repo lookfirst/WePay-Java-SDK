@@ -2,10 +2,10 @@ package com.lookfirst.wepay.api.req;
 
 import java.util.List;
 
-import com.lookfirst.wepay.api.Transfer;
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
+import com.lookfirst.wepay.api.Transfer;
 
 /**
  * https://stage.wepay.com/developer/reference/disbursement

@@ -1,9 +1,9 @@
 package com.lookfirst.wepay.api.req;
 
-import com.lookfirst.wepay.api.AccountBalance;
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
+import com.lookfirst.wepay.api.AccountBalance;
 
 /**
  * https://stage.wepay.com/developer/reference/account

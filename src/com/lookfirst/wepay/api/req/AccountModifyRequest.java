@@ -1,5 +1,7 @@
 package com.lookfirst.wepay.api.req;
 
+import java.util.List;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -27,6 +29,8 @@ public class AccountModifyRequest extends WePayRequest<AccountUri> {
 	private String referenceId;
 	/** The uri for an image that you want to use for the accounts icon. This image will be used in the co-branded checkout process. */
 	private String imageUri;
+	/** The list of Google Analytics account ids that WePay will throw events to and use for tracking. */
+	private List<String> gaqDomains;
 
 	/** */
 	@Override

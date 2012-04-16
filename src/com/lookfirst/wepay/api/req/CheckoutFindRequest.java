@@ -29,6 +29,8 @@ public class CheckoutFindRequest extends WePayRequest<List<CheckoutId>> {
 	private String referenceId;
 	/** What state the checkout is in (see the Instant Payment Notifications reference for details). */
 	private State state;
+	/** The ID of the preapproval that was used to create the checkout. Useful if you want to look up all of the payments for an auto_recurring preapproval. */
+	private Integer preapprovalId;
 
 	/** */
 	@Override

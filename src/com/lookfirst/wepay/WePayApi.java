@@ -95,8 +95,8 @@ public class WePayApi {
 	}
 
 	/** */
-	private static final String STAGING_URL = "https://stage.wepay.com/v2";
-	private static final String PROD_URL = "https://wepay.com/v2";
+	private static final String STAGING_URL = "https://stage.wepayapi.com/v2/";
+	private static final String PROD_URL = "https://wepayapi.com/v2/";
 
 	/** */
 	private String currentUrl;

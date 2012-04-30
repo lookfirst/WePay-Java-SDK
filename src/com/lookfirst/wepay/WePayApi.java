@@ -95,12 +95,12 @@ public class WePayApi {
 	}
 
 	/** */
-	private static final String STAGING_URL = "https://stage.wepayapi.com/v2/";
-	private static final String PROD_URL = "https://wepayapi.com/v2/";
+	private static final String STAGING_URL = "https://stage.wepayapi.com/v2";
+	private static final String PROD_URL = "https://wepayapi.com/v2";
 
 	/** */
 	private String currentUrl;
-	
+
 	/** */
 	@Getter @Setter
 	private WePayKey key;
@@ -108,11 +108,11 @@ public class WePayApi {
 	/** Timeout in milliseconds */
 	@Getter @Setter
 	int timeout;
-	
+
 	/** Number of retries if the connection fails */
 	@Getter @Setter
 	int retries;
-	
+
 	/** */
 	public WePayApi(WePayKey key) {
 		this.key = key;
@@ -222,7 +222,7 @@ public class WePayApi {
 	 */
 	private void checkForError(JsonNode resp) throws WePayException
 	{
-		JsonNode errorNode = resp.get("error"); 
+		JsonNode errorNode = resp.get("error");
 		if (errorNode != null)
 			throw new WePayException(errorNode.asText(), resp.path("error_description").asText());
 	}
@@ -235,7 +235,7 @@ public class WePayApi {
 	private HttpURLConnection getConnection(String uri, String postJson, String token) throws IOException {
 		int tries = 0;
 		IOException last = null;
-		
+
 		while (tries++ <= retries) {
 			try {
 				return getConnectionOnce(uri, postJson, token);
@@ -243,17 +243,17 @@ public class WePayApi {
 				last = ex;
 			}
 		}
-		
+
 		throw last;
 	}
-	
+
 	/**
 	 */
 	private HttpURLConnection getConnectionOnce(String uri, String postJson, String token) throws IOException {
 
 		URL url = new URL(uri);
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-		
+
 		if (timeout > 0) {
 			conn.setReadTimeout(timeout);
 			conn.setConnectTimeout(timeout);
@@ -276,7 +276,7 @@ public class WePayApi {
 			writer.write(postJson);
 			writer.close();
 		}
-		
+
 		return conn;
 	}
 

@@ -86,6 +86,8 @@ public class CheckoutCreateRequest extends WePayRequest<CheckoutUri> {
 	private String preapprovalId;
 	/** A JSON object that lets you pre fill certain fields in the checkout. Allowed fields are 'name', 'email', 'phone_number', 'address', 'city', 'state', 'zip', Pass the prefill-info as a JSON object like so: {"name":"Bill Clerico","phone_number":"855-469-3729"} */
 	private PrefillInfo prefillInfo;
+	/** What funding sources you want to accept for this checkout. Options are: "bank,cc" to accept both bank and cc payments, "cc" to accept just credit card payments, and "bank" to accept just bank payments. */
+	private String fundingSources;
 
 	/** */
 	@Override

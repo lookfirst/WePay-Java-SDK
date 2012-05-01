@@ -101,6 +101,10 @@ public class Checkout extends CheckoutUri {
 	private ShippingAddress shippingAddress;
 	/** The dollar amount of taxes paid. */
 	private String tax;
+	/** If this checkout has been fully or partially refunded, this has the amount that has been refunded so far. */
+	private BigDecimal amountRefunded;
+	/** The unixtime when the checkout was created. */
+	private Long createTime;
 
 	/** */
 	@Data

@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import com.lookfirst.wepay.api.AccountUri;
+import com.lookfirst.wepay.api.ThemeObject;
 
 /**
  * https://stage.wepay.com/developer/reference/account
@@ -31,6 +32,8 @@ public class AccountCreateRequest extends WePayRequest<AccountUri> {
 	private String imageUri;
 	/** The list of Google Analytics account ids that WePay will throw events to and use for tracking. */
 	private List<String> gaqDomains;
+	/** The theme object you want to be used for account's checkout flows, withdrawal flows, and emails */
+	private ThemeObject themeObject;
 
 	/** */
 	@Override

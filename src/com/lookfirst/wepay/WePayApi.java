@@ -266,6 +266,7 @@ public class WePayApi {
 			conn.setDoOutput(true); // Triggers POST.
 		}
 		conn.setRequestProperty("Content-Type", "application/json; charset=utf-8");
+		conn.setRequestProperty("User-Agent", "WePay Java SDK");
 
 		if (token != null) {
 			conn.setRequestProperty("Authorization", "Bearer " + token);

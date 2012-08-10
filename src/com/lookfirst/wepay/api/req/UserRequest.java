@@ -17,6 +17,9 @@ import com.lookfirst.wepay.api.WePayUser;
 @EqualsAndHashCode(callSuper=false)
 public class UserRequest extends WePayRequest<WePayUser> {
 
+	/** No. username to lookup. */
+	private String userName;
+
 	/** */
 	@Override
 	public String getEndpoint() {

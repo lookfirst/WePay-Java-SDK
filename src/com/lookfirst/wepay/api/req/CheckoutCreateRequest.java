@@ -27,7 +27,7 @@ import com.lookfirst.wepay.api.CheckoutUri;
 public class CheckoutCreateRequest extends WePayRequest<CheckoutUri> {
 
 	public static enum Mode { iframe, regular }
-	public static enum Type { GOODS, SERVICE, DONATION, PERSONAL }
+	public static enum Type { GOODS, SERVICE, DONATION, EVENT, PERSONAL }
 
 	@Data
 	public static class PrefillInfo {

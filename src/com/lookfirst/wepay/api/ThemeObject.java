@@ -1,6 +1,7 @@
 package com.lookfirst.wepay.api;
 
 import java.io.Serializable;
+import java.lang.String;
 
 import lombok.Data;
 
@@ -17,6 +18,8 @@ import lombok.Data;
 public class ThemeObject implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+    /** Sets a name for the theme */
+    public String name;
 	/** Sets colors on important elements such as headers */
 	public String primaryColor;
 	/** Sets colors on secondary elements such as info boxes, and the focus styles on text inputs */

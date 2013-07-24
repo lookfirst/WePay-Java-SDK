@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import com.lookfirst.wepay.api.WePayAccount;
+import com.lookfirst.wepay.api.Constants.SortOrder;
 
 /**
  * https://stage.wepay.com/developer/reference/account
@@ -26,7 +27,7 @@ public class AccountFindRequest extends WePayRequest<List<WePayAccount>> {
 	/** The reference ID of the account you are searching for (set by the app in in /account/create or account/modify). */
 	private String referenceId;
 	/** Sort the results of the search by time created. Use 'DESC' for most recent to least recent. Use 'ASC' for least recent to most recent. Defaults to 'DESC'. */
-	private String sortOrder;
+	private SortOrder sortOrder;
 
 	/** */
 	@Override

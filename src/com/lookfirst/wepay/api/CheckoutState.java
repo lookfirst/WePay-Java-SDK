@@ -3,7 +3,7 @@ package com.lookfirst.wepay.api;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import com.lookfirst.wepay.api.Checkout.State;
+import com.lookfirst.wepay.api.Constants.State;
 
 /**
  * https://stage.wepay.com/developer/reference/checkout

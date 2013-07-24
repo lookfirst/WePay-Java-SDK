@@ -7,6 +7,9 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import com.lookfirst.wepay.api.Constants.FeePayer;
+import com.lookfirst.wepay.api.Constants.State;
+
 /**
  * https://stage.wepay.com/developer/reference/checkout
  *
@@ -17,30 +20,6 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper=false)
 public class Checkout extends CheckoutUri {
 	private static final long serialVersionUID = 1L;
-
-	/**
-	 * Note that the toString() impls fix jackson serialization problems
-	 */
-	public static enum State {
-		new_ {
-			@Override
-			public String toString() { return "new"; }
-		},
-		authorized,
-		reserved,
-		captured,
-		settled,
-		cancelled,
-		refunded,
-		charged_back {
-			@Override
-			public String toString() { return "charged back"; }
-		},
-		failed,
-		expired
-	}
-
-	public static enum FeePayer { payer, payee }
 
 	/** The unique ID of the payment account that the money will go into. */
 	private Long accountId;

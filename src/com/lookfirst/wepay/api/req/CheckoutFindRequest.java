@@ -6,8 +6,9 @@ import java.util.List;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import com.lookfirst.wepay.api.Checkout.State;
 import com.lookfirst.wepay.api.CheckoutId;
+import com.lookfirst.wepay.api.Constants.SortOrder;
+import com.lookfirst.wepay.api.Constants.State;
 
 /**
  * https://stage.wepay.com/developer/reference/checkout
@@ -37,7 +38,7 @@ public class CheckoutFindRequest extends WePayRequest<List<CheckoutId>> {
 	/** All checkouts before given end time. Can be a unix_timestamp or a valid, parse-able date-time. */
 	private String endTime;
 	/** Sort the results of the search by time created. Use 'DESC' for most recent to least recent. Use 'ASC' for least recent to most recent. Defaults to 'DESC'. */
-	private String sortOrder;
+	private SortOrder sortOrder;
 	/** All checkouts that have the given shipping fee. */
 	private BigDecimal shippingFee;
 

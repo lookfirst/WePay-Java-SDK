@@ -5,8 +5,11 @@ import java.math.BigDecimal;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import com.lookfirst.wepay.api.Checkout.FeePayer;
 import com.lookfirst.wepay.api.CheckoutUri;
+import com.lookfirst.wepay.api.Constants.FeePayer;
+import com.lookfirst.wepay.api.Constants.Mode;
+import com.lookfirst.wepay.api.Constants.PaymentType;
+import com.lookfirst.wepay.api.Constants.PrefillInfo;
 
 /**
  * https://stage.wepay.com/developer/reference/checkout
@@ -26,20 +29,6 @@ import com.lookfirst.wepay.api.CheckoutUri;
 @EqualsAndHashCode(callSuper=false)
 public class CheckoutCreateRequest extends WePayRequest<CheckoutUri> {
 
-	public static enum Mode { iframe, regular }
-	public static enum Type { GOODS, SERVICE, DONATION, EVENT, PERSONAL }
-
-	@Data
-	public static class PrefillInfo {
-		String name;
-		String email;
-		String phoneNumber;
-		String address;
-		String city;
-		String state;
-		String zip;
-	}
-
 	/** The unique ID of the account you want to create a checkout for. */
 	private Long accountId;
 	/** A short description of what is being paid for. */
@@ -53,7 +42,7 @@ public class CheckoutCreateRequest extends WePayRequest<CheckoutUri> {
 	private String payeeEmailMessage;
 
 	/** Required. The the checkout type (one of the following: GOODS, SERVICE, DONATION, or PERSONAL) */
-	private Type type;
+	private PaymentType type;
 	/** The unique reference id of the checkout (set by the application in /checkout/create */
 	private String referenceId;
 	/** The amount that the payer will pay. */
@@ -79,7 +68,7 @@ public class CheckoutCreateRequest extends WePayRequest<CheckoutUri> {
 	/** What mode the checkout will be displayed in. The options are 'iframe' or 'regular'. Choose 'iframe' if this is an iframe checkout. Mode defaults to 'regular'. */
 	private Mode mode;
 	/** The ID of a preapproval object. If you include a valid preapproval_id the checkout will be executed immediately, and the payer will be charged without having to go to the checkout_uri. You should not have to send the payer to the checkout_uri.  */
-	private String preapprovalId;
+	private Long preapprovalId;
 	/** A JSON object that lets you pre fill certain fields in the checkout. Allowed fields are 'name', 'email', 'phone_number', 'address', 'city', 'state', 'zip', Pass the prefill-info as a JSON object like so: {"name":"Bill Clerico","phone_number":"855-469-3729"} */
 	private PrefillInfo prefillInfo;
 	/** What funding sources you want to accept for this checkout. Options are: "bank,cc" to accept both bank and cc payments, "cc" to accept just credit card payments, and "bank" to accept just bank payments. */

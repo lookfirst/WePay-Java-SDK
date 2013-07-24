@@ -45,18 +45,6 @@ Q: Is this an official API from WePay?
 
 A: I don't have any connection with WePay other than I'm just a happy user of their product. They've been really responsive to me and I just wanted to give back a bit.
 
-Q: What happens if I use this API and I lose all my money?
-
-A: Go cry somewhere else.
-
-Q: Why isn't the whole API here?
-
-A: I just haven't implemented it yet. If you'd like to send me a pull request with a nicely formatted diff, I'd be more than happy to integrate it. Otherwise, you can wait until I have time or need the rest of it myself. ;-)
-
-Q: What's missing?
-
-A: /preapproval, /withdrawl
-
 Q: What are the dependencies?
 
 A: Jackson, Commons-IO, Commons-Lang3, Slf4j. All of the jar files are in the lib directory. I also use Lombok to save me a lot of typing. You don't need lombok to use the API. If you import the project into Eclipse, you will need to also install Lombok. Just double click the lombok.jar and restart Eclipse.

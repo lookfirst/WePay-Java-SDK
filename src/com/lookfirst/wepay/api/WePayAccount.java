@@ -19,7 +19,7 @@ public class WePayAccount extends AccountUri {
 
 	/** The name of the account. */
 	private String name;
-	/** */
+	/** The state of the account: active, disabled or deleted. */
 	private String state;
 	/** The account description. */
 	private String description;

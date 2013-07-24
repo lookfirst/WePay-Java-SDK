@@ -4,7 +4,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import com.lookfirst.wepay.api.AddBank;
-import com.lookfirst.wepay.api.req.CheckoutCreateRequest.Mode;
+import com.lookfirst.wepay.api.Constants.Mode;
 
 /**
  * https://stage.wepay.com/developer/reference/account

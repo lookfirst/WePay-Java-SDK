@@ -37,7 +37,7 @@ public class AccountCreateRequest extends WePayRequest<AccountUri> {
 	/** The theme object you want to be used for account's checkout flows, withdrawal flows, and emails */
 	private ThemeObject themeObject;
 	/** The mcc code that is relevant to the type of account this is. See the mcc reference page for more information. */
-	private Long Mcc;
+	private Integer Mcc;
 	/** The uri that will receive IPNs for this account. You will receive an IPN whenever the account is verified or deleted. */
 	private String callbackUri;
 

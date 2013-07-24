@@ -6,7 +6,7 @@ import lombok.EqualsAndHashCode;
 import com.lookfirst.wepay.api.AppUri;
 
 /**
- * https://stage.wepay.com/developer/reference/account
+ * https://stage.wepay.com/developer/reference/app
  *
  * This call allows you to lookup the details of your API application.
  *
@@ -18,7 +18,7 @@ import com.lookfirst.wepay.api.AppUri;
 public class AppRequest extends WePayRequest<AppUri> {
 
 	/** The integer client ID issued to the app by WePay - see your client ID on your app screen. */
-	private String clientId;
+	private Long clientId;
 	/** The string client secret issued to the app by WePay - see your client secret on your app screen. */
 	private String clientSecret;
 

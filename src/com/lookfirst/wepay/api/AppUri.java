@@ -17,8 +17,8 @@ public class AppUri implements Serializable {
 
 	/** The unique ID of the app. */
 	private String clientId;
-	/** The approval state of the API application. */
-	private String state;
+	/** The approval status of the API application. */
+	private String status;
 	/** The theme object associated with the App (if applicable). */
 	private ThemeObject themeObject;
 	/** An array of Google Analytics domains associated with the app. */

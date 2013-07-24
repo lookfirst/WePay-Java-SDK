@@ -28,12 +28,18 @@ public class AccountCreateRequest extends WePayRequest<AccountUri> {
 	private String description;
 	/** The reference id of the account. Must be unique for the application/user pair. */
 	private String referenceId;
+	/** The type of account you are creating. Can be "nonprofit", "business", or "personal". */
+	private String type;
 	/** The uri for an image that you want to use for the accounts icon. This image will be used in the co-branded checkout process. */
 	private String imageUri;
 	/** The list of Google Analytics account ids that WePay will throw events to and use for tracking. */
 	private List<String> gaqDomains;
 	/** The theme object you want to be used for account's checkout flows, withdrawal flows, and emails */
 	private ThemeObject themeObject;
+	/** The mcc code that is relevant to the type of account this is. See the mcc reference page for more information. */
+	private Long Mcc;
+	/** The uri that will receive IPNs for this account. You will receive an IPN whenever the account is verified or deleted. */
+	private String callbackUri;
 
 	/** */
 	@Override

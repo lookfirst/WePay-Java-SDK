@@ -17,6 +17,6 @@ public class WePayKey implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	public boolean production;
-	public String clientId;
+	public Long clientId;
 	public String clientSecret;
 }

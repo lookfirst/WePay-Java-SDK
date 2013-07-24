@@ -44,6 +44,8 @@ public class Checkout extends CheckoutUri {
 
 	/** The unique ID of the payment account that the money will go into. */
 	private Long accountId;
+	/** The unique ID of the preapproval associated with the checkout (if applicable). */
+	private Long preapprovalId;
 	/** The state the checkout is in. See the section on IPN for a listing of all states. */
 	private State state;
 	/** The short description of the checkout. */
@@ -68,6 +70,8 @@ public class Checkout extends CheckoutUri {
 	private String redirectUri;
 	/** The uri which Instant Payment Notifications will be sent to. */
 	private String callbackUri;
+	/** The uri that payers can visit to open a dispute for this checkout. */
+	private String disputeUri;
 	/** The email address of the person paying (only returned if a payment has been made). */
 	private String payerEmail;
 	/** The name of the person paying (only returned if a payment has been made). */
@@ -104,5 +108,7 @@ public class Checkout extends CheckoutUri {
 		private String state;
 		private String zip;
 		private String country;
+		private String region;
+		private String postalcode;
 	}
 }

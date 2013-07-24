@@ -17,7 +17,7 @@ import com.lookfirst.wepay.api.AccountBalance;
 @EqualsAndHashCode(callSuper=false)
 public class AccountBalanceRequest extends WePayRequest<AccountBalance> {
 
-	/** The name of the account you want the balance for. */
+	/** The unique ID of the account you want to get the balance of. */
 	private Long accountId;
 
 	/** */

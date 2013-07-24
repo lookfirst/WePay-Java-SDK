@@ -20,6 +20,8 @@ public class AccountDeleteRequest extends WePayRequest<AccountId> {
 
 	/** The unique ID of the account you want to look up. */
 	private Long accountId;
+	/** Reason for deleting the account. */
+	private String reason;
 
 	/** */
 	@Override

@@ -47,12 +47,6 @@ public class CheckoutCreateRequest extends WePayRequest<CheckoutUri> {
 	/** A long description of what is being paid for. */
 	private String longDescription;
 
-	/**
-	 * A short message that will be included in the payment confirmation email.
-	 * @deprecated Use payerEmailMessage
-	 */
-	private String emailMessage;
-
 	/** A short message that will be included in the payment confirmation email to the payer. */
 	private String payerEmailMessage;
 	/** A short message that will be included in the payment confirmation email to the payee. */
@@ -72,6 +66,8 @@ public class CheckoutCreateRequest extends WePayRequest<CheckoutUri> {
 	private String redirectUri;
 	/** The uri that will receive any Instant Payment Notifications sent. Needs to be a full uri (ex https://www.wepay.com ) */
 	private String callbackUri;
+	/** The uri that the payer will be redirected to if cookies cannot be set in the iframe; will only work if mode is iframe. */
+	private String fallbackUri;
 	/** A boolean value (0 or 1). Default is 1. If set to 0 then the payment will not automatically be released to the account and will be held by WePay in payment state 'reserved'. To release funds to the account you must call /checkout/capture */
 	private boolean autoCapture;
 	/** A boolean value (0 or 1). If set to 1 then the payer will be asked to enter a shipping address when they pay. After payment you can retrieve this shipping address by calling /checkout */
@@ -88,6 +84,11 @@ public class CheckoutCreateRequest extends WePayRequest<CheckoutUri> {
 	private PrefillInfo prefillInfo;
 	/** What funding sources you want to accept for this checkout. Options are: "bank,cc" to accept both bank and cc payments, "cc" to accept just credit card payments, and "bank" to accept just bank payments. */
 	private String fundingSources;
+
+	/** If you are using credit card tokenization use the credit_card_id you received from the /credit_card/create call. */
+	private Long paymentMethodId;
+	/** Set to 'credit_card' for tokenization. */
+	private String paymentMethodType;
 
 	/** */
 	@Override

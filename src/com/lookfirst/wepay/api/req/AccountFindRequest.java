@@ -25,6 +25,8 @@ public class AccountFindRequest extends WePayRequest<List<WePayAccount>> {
 	private String name;
 	/** The reference ID of the account you are searching for (set by the app in in /account/create or account/modify). */
 	private String referenceId;
+	/** Sort the results of the search by time created. Use 'DESC' for most recent to least recent. Use 'ASC' for least recent to most recent. Defaults to 'DESC'. */
+	private String sortOrder;
 
 	/** */
 	@Override

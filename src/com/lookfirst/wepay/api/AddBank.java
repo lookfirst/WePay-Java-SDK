@@ -11,12 +11,12 @@ import lombok.Data;
  * @author Jeff Schnitzer
  */
 @Data
-public class AccountId implements Serializable {
+public class AddBank implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/** The unique ID of the account. */
 	private Long accountId;
-	/** The state of the account. */
-	private String state;
+	/** The URI to add the bank account to the specified acocunt id. */
+	private String addBankUri;
 
 }

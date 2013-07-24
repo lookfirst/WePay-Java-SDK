@@ -1,5 +1,6 @@
 package com.lookfirst.wepay.api.req;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import lombok.Data;
@@ -31,6 +32,14 @@ public class CheckoutFindRequest extends WePayRequest<List<CheckoutId>> {
 	private State state;
 	/** The ID of the preapproval that was used to create the checkout. Useful if you want to look up all of the payments for an auto_recurring preapproval. */
 	private Integer preapprovalId;
+	/** All checkouts after given start time. Can be a unix_timestamp or a valid, parse-able date-time. */
+	private String startTime;
+	/** All checkouts before given end time. Can be a unix_timestamp or a valid, parse-able date-time. */
+	private String endTime;
+	/** Sort the results of the search by time created. Use 'DESC' for most recent to least recent. Use 'ASC' for least recent to most recent. Defaults to 'DESC'. */
+	private String sortOrder;
+	/** All checkouts that have the given shipping fee. */
+	private BigDecimal shippingFee;
 
 	/** */
 	@Override

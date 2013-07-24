@@ -25,8 +25,12 @@ public class CheckoutRefundRequest extends WePayRequest<CheckoutState> {
 	private String refundReason;
 	/** Optionally specified partial refund amount */
 	private BigDecimal amount;
-	/** Optional unique reference id, which allows partial refunds to be idempotent */
-	String referenceId;
+	/** The portion of the 'amount' that will be refunded as an app_fee refund. For example, if 'amount' is 100.00 and 'app_fee' is 10.00, then the payer will receive a refund of 100.00, where 90.00 is the net refund from the payment account, and 10.00 is the app_fee refund. Note that this value must be less than the remaining balance of the app fee. */
+	private BigDecimal appFee;
+	/** A short message that will be included in the payment confirmation email to the payer. */
+	private String payerEmailMessage;
+	/** A short message that will be included in the payment confirmation email to the payee. */
+	private String payeeEmailMessage;
 
 	/** */
 	@Override

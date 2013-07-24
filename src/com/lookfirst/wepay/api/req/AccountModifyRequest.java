@@ -34,6 +34,8 @@ public class AccountModifyRequest extends WePayRequest<AccountUri> {
 	private List<String> gaqDomains;
 	/** The theme object you want to be used for account's checkout flows, withdrawal flows, and emails */
 	private ThemeObject themeObject;
+	/** The uri that will receive IPNs for this account. You will receive an IPN whenever the account is verified or deleted. */
+	private String callbackUri;
 
 	/** */
 	@Override

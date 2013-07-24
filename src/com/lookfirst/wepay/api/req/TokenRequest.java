@@ -21,7 +21,7 @@ public class TokenRequest extends WePayRequest<Token> {
 	public static final String ENDPOINT = "/oauth2/token";
 
 	/** Yes	The client ID issued to the app by WePay - see your client ID on your app screen */
-	private String clientId;
+	private Long clientId;
 	/** Yes	The uri the user will be redirected to after authorization. Must be the same as passed in /v2/oauth2/authorize */
 	private String redirectUri;
 	/** Yes	The client secret issued to the app by WePay - see your client secret on your app screen */

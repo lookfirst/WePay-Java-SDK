@@ -85,6 +85,6 @@ public class PreapprovalCreateRequest extends WePayRequest<Preapproval> {
 	/** */
 	@Override
 	public String getEndpoint() {
-		return "/preapproval";
+		return "/preapproval/create";
 	}
 }

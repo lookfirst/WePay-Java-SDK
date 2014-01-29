@@ -1,24 +1,5 @@
 package com.lookfirst.wepay;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStreamWriter;
-import java.io.UnsupportedEncodingException;
-import java.lang.reflect.ParameterizedType;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLEncoder;
-import java.util.Arrays;
-import java.util.List;
-
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.extern.slf4j.Slf4j;
-
-import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.StringUtils;
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JavaType;
@@ -29,6 +10,25 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.lookfirst.wepay.api.Token;
 import com.lookfirst.wepay.api.req.TokenRequest;
 import com.lookfirst.wepay.api.req.WePayRequest;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
+import java.lang.reflect.ParameterizedType;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Implements a way to communicate with the WePayApi.
@@ -48,6 +48,8 @@ public class WePayApi {
 	 *
 	 * https://stage.wepay.com/developer/reference/permissions
 	 */
+	@AllArgsConstructor
+	@ToString(of = "scope")
 	public enum Scope {
 		SCOPE_MANAGE_ACCOUNTS		("manage_accounts"),	// Open and interact with accounts
 		SCOPE_VIEW_BALANCE			("view_balance"),		// View account balances
@@ -59,21 +61,8 @@ public class WePayApi {
 
 		private String scope;
 
-		private Scope(String scope) {
-			this.scope = scope;
-		}
-
-		public String getScope() {
-			return scope;
-		}
-
 		public static List<Scope> getAll() {
 			return Arrays.asList(values());
-		}
-
-		@Override
-		public String toString() {
-			return this.scope;
 		}
 	}
 

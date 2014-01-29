@@ -115,6 +115,7 @@ public class WePayApi {
 	 * @see <a href="https://www.wepay.com/developer/reference/oauth2">https://www.wepay.com/developer/reference/oauth2</a>
 	 * @param scopes             List of scope fields for which your application wants access
 	 * @param redirectUri      Where user goes after logging in at WePay (domain must match application settings)
+	 * @param state    The opaque value the client application uses to maintain state.
 	 * @return string URI to which you must redirect your user to grant access to your application
 	 */
 	public String getAuthorizationUri(List<Scope> scopes, String redirectUri, String state) {

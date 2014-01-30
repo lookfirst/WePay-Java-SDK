@@ -1,14 +1,13 @@
 package com.lookfirst.wepay.api.req;
 
-import java.math.BigDecimal;
-
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-
-import com.lookfirst.wepay.api.Preapproval;
 import com.lookfirst.wepay.api.Constants.FeePayer;
 import com.lookfirst.wepay.api.Constants.Mode;
 import com.lookfirst.wepay.api.Constants.PrefillInfo;
+import com.lookfirst.wepay.api.Preapproval;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+import java.math.BigDecimal;
 
 /**
  * https://stage.wepay.com/developer/reference/preapproval
@@ -37,6 +36,8 @@ public class PreapprovalCreateRequest extends WePayRequest<Preapproval> {
 	private Long accountId;
 	/** The amount for the preapproval. The API application can charge up to this amount every period. */
 	private BigDecimal amount;
+	/** The currency used, default "USD" ("USD" for now). */
+	private String currency;
 	/** A short description of what the payer is paying for. */
 	private String shortDescription;
 	/** Can be: hourly, daily, weekly, biweekly, monthly, bimonthly, quarterly, yearly, or once. The API application can charge the payer every period. */

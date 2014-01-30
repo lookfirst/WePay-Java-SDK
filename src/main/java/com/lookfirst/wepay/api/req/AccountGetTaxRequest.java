@@ -13,6 +13,7 @@ import com.lookfirst.wepay.api.AccountTax;
  * @author Jon Scott Stevens
  * @author Jeff Schnitzer
  */
+@Deprecated
 @Data
 @EqualsAndHashCode(callSuper=false)
 public class AccountGetTaxRequest extends WePayRequest<AccountTax> {

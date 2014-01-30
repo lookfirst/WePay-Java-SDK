@@ -1,12 +1,11 @@
 package com.lookfirst.wepay.api.req;
 
-import java.util.List;
-
+import com.lookfirst.wepay.api.AccountUri;
+import com.lookfirst.wepay.api.ThemeObject;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import com.lookfirst.wepay.api.AccountUri;
-import com.lookfirst.wepay.api.ThemeObject;
+import java.util.List;
 
 /**
  * https://stage.wepay.com/developer/reference/account
@@ -37,9 +36,13 @@ public class AccountCreateRequest extends WePayRequest<AccountUri> {
 	/** The theme object you want to be used for account's checkout flows, withdrawal flows, and emails */
 	private ThemeObject themeObject;
 	/** The mcc code that is relevant to the type of account this is. See the mcc reference page for more information. */
-	private Integer Mcc;
+	private Integer mcc;
 	/** The uri that will receive IPNs for this account. You will receive an IPN whenever the account is verified or deleted. */
 	private String callbackUri;
+	/** The account's country of origin 2-letter ISO code (e.g. 'US') */
+	private String country;
+	/** Array of supported currency strings for this account (e.g. ["USD"]) Only "USD" is supported for now. */
+	private List<String> currencies;
 
 	/** */
 	@Override

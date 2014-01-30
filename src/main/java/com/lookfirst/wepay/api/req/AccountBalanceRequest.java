@@ -12,7 +12,10 @@ import com.lookfirst.wepay.api.AccountBalance;
  *
  * @author Jon Scott Stevens
  * @author Jeff Schnitzer
+ *
+ * @deprecated Data is now returned as part of /account
  */
+@Deprecated
 @Data
 @EqualsAndHashCode(callSuper=false)
 public class AccountBalanceRequest extends WePayRequest<AccountBalance> {

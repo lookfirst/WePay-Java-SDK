@@ -1,9 +1,9 @@
 package com.lookfirst.wepay.api;
 
-import java.util.List;
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
+import java.util.List;
 
 
 /**
@@ -37,4 +37,16 @@ public class WePayAccount extends AccountUri {
 	private String verificationUrl;
 	/** The account type. Can be "personal", "nonprofit", or "business". */
 	private String type;
+	/** The unixtime when the account was created. */
+	private Long createTime;
+	/** Array of account balances for each currency. */
+	private List<AccountBalance> balances;
+	/** Array of account incoming and outgoing payments status for each currency. */
+	private List<AccountStatus> statuses;
+	/** Array of action strings explaining all the actions that are required to make this account active. It will be empty if no action is required. */
+	private List<String> actionReasons;
+	/** The account's country of origin 2-letter ISO code (e.g. 'US') */
+	private String country;
+	/** Array of supported currency strings for this account (e.g. ["USD"]). Only "USD" is supported for now. */
+	private List<String> currencies;
 }

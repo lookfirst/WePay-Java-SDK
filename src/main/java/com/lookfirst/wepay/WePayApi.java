@@ -238,7 +238,7 @@ public class WePayApi {
 	{
 		JsonNode errorNode = resp.get("error");
 		if (errorNode != null)
-			throw new WePayException(errorNode.asText(), resp.path("error_description").asText());
+			throw new WePayException(errorNode.asText(), resp.path("error_description").asText(), resp.path("error_code").asInt());
 	}
 
 	/**

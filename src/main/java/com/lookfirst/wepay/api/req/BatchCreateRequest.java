@@ -1,11 +1,11 @@
 package com.lookfirst.wepay.api.req;
 
-import java.util.List;
-
+import com.lookfirst.wepay.api.Call;
+import com.lookfirst.wepay.api.Calls;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import com.lookfirst.wepay.api.Call;
+import java.util.List;
 
 /**
  * https://stage.wepay.com/developer/reference/batch
@@ -19,7 +19,7 @@ import com.lookfirst.wepay.api.Call;
  */
 @Data
 @EqualsAndHashCode(callSuper=false)
-public class BatchCreateRequest extends WePayRequest<Call> {
+public class BatchCreateRequest extends WePayRequest<Calls> {
 
 	/** The integer client ID issued to the app by WePay - see your client ID on your app screen. */
 	private Long clientId;

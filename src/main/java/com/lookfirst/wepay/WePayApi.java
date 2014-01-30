@@ -10,6 +10,7 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.lookfirst.wepay.api.Token;
 import com.lookfirst.wepay.api.req.TokenRequest;
 import com.lookfirst.wepay.api.req.WePayRequest;
+import com.lookfirst.wepay.util.DataProvider;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -102,10 +103,34 @@ public class WePayApi {
 	@Getter @Setter
 	int retries;
 
+	/** For unit testing. */
+	private DataProvider dataProvider;
+
+	/** For unit testing. */
+	@NoArgsConstructor
+	public class DataProviderImpl implements DataProvider {
+		@Override
+		public InputStream getData(String uri, String postJson, String token) throws IOException {
+			HttpURLConnection conn = getConnection(uri, postJson, token);
+			return conn.getInputStream();
+		}
+	}
+
 	/** */
 	public WePayApi(WePayKey key) {
+		this(key, null);
+	}
+
+	/** For unit testing. */
+	public WePayApi(WePayKey key, DataProvider provider) {
 		this.key = key;
 		this.currentUrl = key.isProduction() ? PROD_URL : STAGING_URL;
+
+		if (provider != null) {
+			this.dataProvider = provider;
+		} else {
+			this.dataProvider = new DataProviderImpl();
+		}
 	}
 
 	/**
@@ -174,17 +199,16 @@ public class WePayApi {
 
 		String uri = currentUrl + req.getEndpoint();
 
-		JsonNode resp = null;
-
-		String post = MAPPER.writeValueAsString(req);
+		String postJson = MAPPER.writeValueAsString(req);
 
 		if (log.isTraceEnabled()) {
-			log.trace("request to {}:  {}", uri, post);
+			log.trace("request to {}:  {}", uri, postJson);
 		}
 
-		HttpURLConnection conn = getConnection(uri, post, token);
-		InputStream is = conn.getInputStream();
+		// Use the data provider to get an input stream response. This is faked out in tests.
+		InputStream is = dataProvider.getData(uri, postJson, token);
 
+		JsonNode resp;
 		if (log.isTraceEnabled()) {
 			String results = IOUtils.toString(is);
 			log.trace("response: " + results);
@@ -238,6 +262,7 @@ public class WePayApi {
 	}
 
 	/**
+	 * Sets up the headers and writes the post data.
 	 */
 	private HttpURLConnection getConnectionOnce(String uri, String postJson, String token) throws IOException {
 

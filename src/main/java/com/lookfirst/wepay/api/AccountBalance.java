@@ -34,9 +34,12 @@ public class AccountBalance implements Serializable {
 	/** Older api */
 
 	/** The pending balance of the account. */
+	@Deprecated
 	private BigDecimal pendingBalance;
 	/** The actual amount of money that has cleared and is available to the account. */
+	@Deprecated
 	private BigDecimal availableBalance;
 	/** The actual amount of money in dollars that is pending. */
+	@Deprecated
 	private BigDecimal pendingAmount;
 }

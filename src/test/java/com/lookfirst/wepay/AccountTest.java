@@ -63,5 +63,6 @@ public class AccountTest {
 		List<WePayAccount> accounts = api.execute("token", find);
 		assert accounts.size() == 1;
 		assert accounts.get(0).getAccountId() == 12345L;
+		assert accounts.get(0).getBalances().get(0).getIncomingPendingAmount().toString().equals("635.3");
 	}
 }

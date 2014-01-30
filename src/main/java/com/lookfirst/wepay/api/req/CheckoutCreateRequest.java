@@ -1,15 +1,14 @@
 package com.lookfirst.wepay.api.req;
 
-import java.math.BigDecimal;
-
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-
 import com.lookfirst.wepay.api.CheckoutUri;
 import com.lookfirst.wepay.api.Constants.FeePayer;
 import com.lookfirst.wepay.api.Constants.Mode;
 import com.lookfirst.wepay.api.Constants.PaymentType;
 import com.lookfirst.wepay.api.Constants.PrefillInfo;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+import java.math.BigDecimal;
 
 /**
  * https://stage.wepay.com/developer/reference/checkout
@@ -47,6 +46,8 @@ public class CheckoutCreateRequest extends WePayRequest<CheckoutUri> {
 	private String referenceId;
 	/** The amount that the payer will pay. */
 	private BigDecimal amount;
+	/** The currency used, default "USD" ("USD" for now). */
+	private String currency;
 	/** The amount that the application will receive in fees. App fees go into the API applications WePay account. */
 	private BigDecimal appFee;
 	/** Who will pay the fees (WePay's fees and any app fees). Set to "Payer" to charge fees to the person paying (Payer will pay amount + fees, payee will receive amount). Set to "Payee" to charge fees to the person receiving money (Payer will pay amount, Payee will receive amount - fees). Defaults to "Payer". */

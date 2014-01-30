@@ -25,10 +25,14 @@ public class WithdrawalCreateRequest extends WePayRequest<Withdrawal> {
 	private String redirectUri;
 	/** The uri that will receive POST notifications each time the withdrawal changes state. See the IPN tutorial for more details. Needs to be a full uri (ex https://www.wepay.com ) and must NOT be localhost or 127.0.0.1 or include wepay.com. Max 2083 chars. */
 	private String callbackUri;
+	/** The uri that the payer will be redirected to if cookies cannot be set in the iframe; will only work if mode is iframe. */
+	private String fallbackUri;
 	/** A short description of the withdrawal (255 characters). */
 	private String note;
 	/** What mode the withdrawal will be displayed in. The options are 'iframe' or 'regular'. Choose 'iframe' if this is an iframe withdrawal. Mode defaults to 'regular'. */
 	private Mode mode;
+	/** The currency used, default "USD" ("USD" for now). */
+	private String currency;
 
 	/** */
 	@Override

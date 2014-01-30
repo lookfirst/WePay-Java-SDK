@@ -13,6 +13,7 @@ import com.lookfirst.wepay.api.TransferState;
  * @author Jon Scott Stevens
  * @author Jeff Schnitzer
  */
+@Deprecated
 @Data
 @EqualsAndHashCode(callSuper=false)
 public class TransferRefundRequest extends WePayRequest<TransferState> {

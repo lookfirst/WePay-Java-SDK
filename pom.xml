@@ -122,9 +122,16 @@
 		<dependency>
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
-			<version>6.8</version>
+			<version>6.8.7</version>
 			<scope>test</scope>
 		</dependency>
+
+		<!--<dependency>-->
+			<!--<groupId>org.mockito</groupId>-->
+			<!--<artifactId>mockito-core</artifactId>-->
+			<!--<version>1.9.5</version>-->
+			<!--<scope>test</scope>-->
+		<!--</dependency>-->
 
         <dependency>
         	<groupId>com.fasterxml.jackson.core</groupId>
@@ -154,7 +161,7 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<version>0.11.8</version>
+			<version>1.12.4</version>
 			<optional>true</optional>
 		</dependency>
 		<dependency>

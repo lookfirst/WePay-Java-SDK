@@ -1,13 +1,12 @@
 package com.lookfirst.wepay.api;
 
-import java.io.Serializable;
-import java.math.BigDecimal;
-
+import com.lookfirst.wepay.api.Constants.State;
+import com.lookfirst.wepay.api.Constants.WithdrawalType;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import com.lookfirst.wepay.api.Constants.State;
-import com.lookfirst.wepay.api.Constants.WithdrawalType;
+import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
  * https://stage.wepay.com/developer/reference/withdrawal
@@ -38,6 +37,8 @@ public class Withdrawal implements Serializable {
 	private String callbackUri;
 	/** The amount on money withdrawn from the WePay account to the bank account. */
 	private BigDecimal amount;
+	/** The currency used, default "USD" ("USD" for now). */
+	private String currency;
 	/** A short description for the reason of the withdrawal (255 characters). */
 	private String note;
 	/** Whether the recipient of the money has been confirmed (for bank withdrawals this is the receiving bank account). */
@@ -46,4 +47,6 @@ public class Withdrawal implements Serializable {
 	private WithdrawalType type;
 	/** The unixtime when the withdrawal was created. */
 	private Long createTime;
+	/** The unixtime when the withdrawal was captured and credited to the payee's bank account. Returns 0 if withdrawal is not yet captured. */
+	private Long captureTime;
 }

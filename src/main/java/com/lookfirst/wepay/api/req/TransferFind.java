@@ -1,11 +1,10 @@
 package com.lookfirst.wepay.api.req;
 
-import java.util.List;
-
+import com.lookfirst.wepay.api.Transfer;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import com.lookfirst.wepay.api.Transfer;
+import java.util.List;
 
 /**
  * https://stage.wepay.com/developer/reference/disbursement
@@ -15,6 +14,7 @@ import com.lookfirst.wepay.api.Transfer;
  * @author Jon Scott Stevens
  * @author Jeff Schnitzer
  */
+@Deprecated
 @Data
 @EqualsAndHashCode(callSuper=false)
 public class TransferFind extends WePayRequest<List<Transfer>> {

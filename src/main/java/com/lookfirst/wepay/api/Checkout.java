@@ -1,14 +1,13 @@
 package com.lookfirst.wepay.api;
 
-import java.math.BigDecimal;
-
+import com.lookfirst.wepay.api.Constants.FeePayer;
+import com.lookfirst.wepay.api.Constants.State;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import com.lookfirst.wepay.api.Constants.FeePayer;
-import com.lookfirst.wepay.api.Constants.State;
+import java.math.BigDecimal;
 
 /**
  * https://stage.wepay.com/developer/reference/checkout
@@ -27,6 +26,8 @@ public class Checkout extends CheckoutUri {
 	private Long preapprovalId;
 	/** The state the checkout is in. See the section on IPN for a listing of all states. */
 	private State state;
+	/** The payment description that will show up on payer's credit card statement. (255) */
+	private String softDescriptor;
 	/** The short description of the checkout. */
 	private String shortDescription;
 	/** The long description of the checkout (if available). */
@@ -72,6 +73,9 @@ public class Checkout extends CheckoutUri {
 	private String tax;
 	/** If this checkout has been fully or partially refunded, this has the amount that has been refunded so far. */
 	private BigDecimal amountRefunded;
+	/** If this checkout has been fully or partially charged back, this has the amount that has been charged back so far. */
+	private BigDecimal amountChargedBack;
+
 	/** The unixtime when the checkout was created. */
 	private Long createTime;
 

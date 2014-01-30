@@ -1,24 +1,5 @@
 package com.lookfirst.wepay;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStreamWriter;
-import java.io.UnsupportedEncodingException;
-import java.lang.reflect.ParameterizedType;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLEncoder;
-import java.util.Arrays;
-import java.util.List;
-
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.extern.slf4j.Slf4j;
-
-import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.StringUtils;
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JavaType;
@@ -29,6 +10,26 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.lookfirst.wepay.api.Token;
 import com.lookfirst.wepay.api.req.TokenRequest;
 import com.lookfirst.wepay.api.req.WePayRequest;
+import com.lookfirst.wepay.util.DataProvider;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
+import java.lang.reflect.ParameterizedType;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Implements a way to communicate with the WePayApi.
@@ -48,6 +49,8 @@ public class WePayApi {
 	 *
 	 * https://stage.wepay.com/developer/reference/permissions
 	 */
+	@AllArgsConstructor
+	@ToString(of = "scope")
 	public enum Scope {
 		SCOPE_MANAGE_ACCOUNTS		("manage_accounts"),	// Open and interact with accounts
 		SCOPE_VIEW_BALANCE			("view_balance"),		// View account balances
@@ -59,21 +62,8 @@ public class WePayApi {
 
 		private String scope;
 
-		private Scope(String scope) {
-			this.scope = scope;
-		}
-
-		public String getScope() {
-			return scope;
-		}
-
 		public static List<Scope> getAll() {
 			return Arrays.asList(values());
-		}
-
-		@Override
-		public String toString() {
-			return this.scope;
 		}
 	}
 
@@ -113,10 +103,34 @@ public class WePayApi {
 	@Getter @Setter
 	int retries;
 
+	/** For unit testing. */
+	private DataProvider dataProvider;
+
+	/** For unit testing. */
+	@NoArgsConstructor
+	public class DataProviderImpl implements DataProvider {
+		@Override
+		public InputStream getData(String uri, String postJson, String token) throws IOException {
+			HttpURLConnection conn = getConnection(uri, postJson, token);
+			return conn.getInputStream();
+		}
+	}
+
 	/** */
 	public WePayApi(WePayKey key) {
+		this(key, null);
+	}
+
+	/** For unit testing. */
+	public WePayApi(WePayKey key, DataProvider provider) {
 		this.key = key;
 		this.currentUrl = key.isProduction() ? PROD_URL : STAGING_URL;
+
+		if (provider != null) {
+			this.dataProvider = provider;
+		} else {
+			this.dataProvider = new DataProviderImpl();
+		}
 	}
 
 	/**
@@ -126,6 +140,7 @@ public class WePayApi {
 	 * @see <a href="https://www.wepay.com/developer/reference/oauth2">https://www.wepay.com/developer/reference/oauth2</a>
 	 * @param scopes             List of scope fields for which your application wants access
 	 * @param redirectUri      Where user goes after logging in at WePay (domain must match application settings)
+	 * @param state    The opaque value the client application uses to maintain state.
 	 * @return string URI to which you must redirect your user to grant access to your application
 	 */
 	public String getAuthorizationUri(List<Scope> scopes, String redirectUri, String state) {
@@ -184,17 +199,16 @@ public class WePayApi {
 
 		String uri = currentUrl + req.getEndpoint();
 
-		JsonNode resp = null;
-
-		String post = MAPPER.writeValueAsString(req);
+		String postJson = MAPPER.writeValueAsString(req);
 
 		if (log.isTraceEnabled()) {
-			log.trace("request to {}:  {}", uri, post);
+			log.trace("request to {}:  {}", uri, postJson);
 		}
 
-		HttpURLConnection conn = getConnection(uri, post, token);
-		InputStream is = conn.getInputStream();
+		// Use the data provider to get an input stream response. This is faked out in tests.
+		InputStream is = dataProvider.getData(uri, postJson, token);
 
+		JsonNode resp;
 		if (log.isTraceEnabled()) {
 			String results = IOUtils.toString(is);
 			log.trace("response: " + results);
@@ -224,7 +238,7 @@ public class WePayApi {
 	{
 		JsonNode errorNode = resp.get("error");
 		if (errorNode != null)
-			throw new WePayException(errorNode.asText(), resp.path("error_description").asText());
+			throw new WePayException(errorNode.asText(), resp.path("error_description").asText(), resp.path("error_code").asInt());
 	}
 
 	/**
@@ -248,6 +262,7 @@ public class WePayApi {
 	}
 
 	/**
+	 * Sets up the headers and writes the post data.
 	 */
 	private HttpURLConnection getConnectionOnce(String uri, String postJson, String token) throws IOException {
 

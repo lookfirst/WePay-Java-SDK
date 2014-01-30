@@ -9,6 +9,7 @@ import lombok.EqualsAndHashCode;
  * @author Jon Scott Stevens
  * @author Jeff Schnitzer
  */
+@Deprecated
 @Data
 @EqualsAndHashCode(callSuper=true)
 public class Transfer extends TransferInstruction {

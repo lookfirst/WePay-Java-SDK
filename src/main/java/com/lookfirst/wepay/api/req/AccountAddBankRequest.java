@@ -16,6 +16,7 @@ import com.lookfirst.wepay.api.Constants.Mode;
  * @author Jon Scott Stevens
  * @author Jeff Schnitzer
  */
+@Deprecated
 @Data
 @EqualsAndHashCode(callSuper=false)
 public class AccountAddBankRequest extends WePayRequest<AddBank> {

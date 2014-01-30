@@ -1,9 +1,9 @@
 package com.lookfirst.wepay.api;
 
-import java.io.Serializable;
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
+import java.io.Serializable;
 
 /**
  * https://stage.wepay.com/developer/reference/disbursement
@@ -13,6 +13,7 @@ import lombok.EqualsAndHashCode;
  * @author Jon Scott Stevens
  * @author Jeff Schnitzer
  */
+@Deprecated
 @Data
 @EqualsAndHashCode(callSuper=false)
 public class TransferState implements Serializable {

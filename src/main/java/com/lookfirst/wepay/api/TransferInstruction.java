@@ -1,8 +1,8 @@
 package com.lookfirst.wepay.api;
 
-import java.io.Serializable;
-
 import lombok.Data;
+
+import java.io.Serializable;
 
 /**
  * Defines the basic request for a single transfer.  
@@ -10,6 +10,7 @@ import lombok.Data;
  * @author Jon Scott Stevens
  * @author Jeff Schnitzer
  */
+@Deprecated
 @Data
 public class TransferInstruction implements Serializable {
 	private static final long serialVersionUID = 1L;

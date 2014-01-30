@@ -14,6 +14,7 @@ import com.lookfirst.wepay.api.Transfer;
  * @author Jon Scott Stevens
  * @author Jeff Schnitzer
  */
+@Deprecated
 @Data
 @EqualsAndHashCode(callSuper=false)
 public class TransferRequest extends WePayRequest<Transfer> {

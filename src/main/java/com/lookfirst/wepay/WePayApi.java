@@ -15,7 +15,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -50,20 +49,23 @@ public class WePayApi {
 	 * https://stage.wepay.com/developer/reference/permissions
 	 */
 	@AllArgsConstructor
-	@ToString(of = "scope")
 	public enum Scope {
-		SCOPE_MANAGE_ACCOUNTS		("manage_accounts"),	// Open and interact with accounts
-		SCOPE_VIEW_BALANCE			("view_balance"),		// View account balances
-		SCOPE_COLLECT_PAYMENTS		("collect_payments"),	// Create and interact with checkouts
-		SCOPE_REFUND_PAYMENTS		("refund_payments"),	// Refund checkouts
-		SCOPE_VIEW_USER				("view_user"),			// Get details about authenticated user
-		SCOPE_PREAPPROVE_PAYMENTS	("preapprove_payments"),// preapproval
-		SCOPE_SEND_MONEY			("send_money");			// /disbursement & /transfer
+		MANAGE_ACCOUNTS		("manage_accounts"),	// Open and interact with accounts
+		VIEW_BALANCE		("view_balance"),		// View account balances
+		COLLECT_PAYMENTS	("collect_payments"),	// Create and interact with checkouts
+		REFUND_PAYMENTS		("refund_payments"),	// Refund checkouts
+		VIEW_USER			("view_user"),			// Get details about authenticated user
+		PREAPPROVE_PAYMENTS	("preapprove_payments"),// preapproval
+		SEND_MONEY			("send_money");			// /disbursement & /transfer
 
 		private String scope;
 
 		public static List<Scope> getAll() {
 			return Arrays.asList(values());
+		}
+
+		public String toString() {
+			return scope;
 		}
 	}
 

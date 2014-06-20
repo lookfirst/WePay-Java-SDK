@@ -19,7 +19,7 @@ Maven
 </dependency>
 ```
 
-To do a release: `mvn deploy -DperformRelease=true`
+To do a release: `mvn clean deploy; mvn release:clean; mvn release:prepare; mvn release:perform`
 
 How to use
 -----------

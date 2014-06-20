@@ -48,4 +48,8 @@ A: MIT License
 
 Q: Is this an official API from WePay?
 
-A: I don't have any connection with WePay other than I'm just a happy user of their product. They've been really responsive to me and I just wanted to give back a bit.
+A: No. I don't have any connection with WePay other than I'm just a happy user of their product. They've been really responsive to me and I just wanted to give back a bit.
+
+Q: How is this project different from the one provided by WePay?
+
+A: We use Maven to do the build and the jar is deployed to Maven Central. The JSON serialization is performed using Jackson (cleaner) vs. GSON. We don't inflict you with dealing with OAuth2 as part of the API. One can argue that this project is more 'Java friendly' as the other API feels like it is written by someone new to Java. Honestly, we have no idea why WePay built their own.

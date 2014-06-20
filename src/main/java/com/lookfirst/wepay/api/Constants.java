@@ -27,22 +27,40 @@ public class Constants {
 	 * Note that the toString() impls fix jackson serialization problems
 	 */
 	public static enum State {
-		new_ {
+		action_required {
 			@Override
-			public String toString() { return "new"; }
+			public String toString() { return "action required"; }
 		},
+		active,
+		approved,
 		authorized,
-		reserved,
-		captured,
-		settled,
+		available,
 		cancelled,
-		refunded,
+		captured,
 		charged_back {
 			@Override
 			public String toString() { return "charged back"; }
 		},
+		completed,
+		deleted,
+		disabled,
+		ended,
+		expired,
 		failed,
-		expired
+		invalid,
+		new_ {
+			@Override
+			public String toString() { return "new"; }
+		},
+		pending,
+		refunded,
+		registered,
+		reserved,
+		revoked,
+		settled,
+		started,
+		transition,
+		trial
 	}
 
 	public static enum FeePayer { payer, payee, payer_from_app, payee_from_app }

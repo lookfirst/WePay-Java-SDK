@@ -56,6 +56,7 @@ public class Constants {
 		refunded,
 		registered,
 		reserved,
+		retrying,
 		revoked,
 		settled,
 		started,

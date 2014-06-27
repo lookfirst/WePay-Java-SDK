@@ -59,6 +59,7 @@ public class Constants {
 		revoked,
 		settled,
 		started,
+		stopped,
 		transition,
 		trial
 	}

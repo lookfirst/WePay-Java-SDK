@@ -114,7 +114,18 @@ public class WePayApi {
 		@Override
 		public InputStream getData(String uri, String postJson, String token) throws IOException {
 			HttpURLConnection conn = getConnection(uri, postJson, token);
-			return conn.getInputStream();
+			int responseCode = conn.getResponseCode();
+			if (responseCode >= 200 && responseCode < 300) {
+				// everything's cool
+				return conn.getInputStream();
+			} else if (responseCode >= 400 && responseCode < 600) {
+				// something's wrong - get the error stream instead
+				return conn.getErrorStream();
+			} else {
+				// this will throw an IOException for all other HTTP codes but Java doesn't know that
+				// so make it think you're returning something 
+				return conn.getInputStream();
+			}
 		}
 	}
 

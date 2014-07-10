@@ -15,7 +15,7 @@ Maven
 <dependency>
     <groupId>com.github.lookfirst</groupId>
 	<artifactId>WePay-Java-SDK</artifactId>
-	<version>2.0.7</version>
+	<version>2.0.8</version>
 </dependency>
 ```
 

@@ -34,7 +34,7 @@ public class UserRegisterRequest extends WePayRequest<Token> {
 	private String originalIp;
 	/** The user-agent (for web) or the IMEI (for mobile) of the user you want to register */
 	private String originalDevice;
-  /** The date the user accepted WePay's TOS. Must be a unix_timestamp. Required. */
+	/** The date the user accepted WePay's TOS. Must be a unix_timestamp. Required. */
 	private String tosAcceptanceTime;
 	/** The uri the user will be redirected to after they have confirmed they wanted to be registered on WePay. By default this will be your application's homepage. */
 	private String redirectUri;

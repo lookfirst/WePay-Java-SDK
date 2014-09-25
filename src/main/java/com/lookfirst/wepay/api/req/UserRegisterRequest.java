@@ -1,5 +1,7 @@
 package com.lookfirst.wepay.api.req;
 
+import java.util.Date;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

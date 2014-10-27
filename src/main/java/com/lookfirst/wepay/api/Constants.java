@@ -7,6 +7,7 @@ public class Constants {
 
 	public static enum Mode { iframe, regular }
 	public static enum PaymentType { GOODS, SERVICE, DONATION, EVENT, PERSONAL }
+	public static enum PaymentMethodType { credit_card }
 	public static enum WithdrawalType { check, ach }
 
 	@Data

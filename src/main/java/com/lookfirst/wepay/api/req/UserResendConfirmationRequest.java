@@ -14,9 +14,11 @@ import com.lookfirst.wepay.api.WePayUser;
  *
  * @author Jon Scott Stevens
  * @author Jeff Schnitzer
+ * @deprecated https://www.wepay.com/developer/reference/user-2011-01-15
  */
 @Data
 @EqualsAndHashCode(callSuper=false)
+@Deprecated
 public class UserResendConfirmationRequest extends WePayRequest<WePayUser> {
 
 	/** */
